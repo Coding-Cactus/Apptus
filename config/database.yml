@@ -1,0 +1,23 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch('PGUSER', '') %>
+  password: <%= ENV['PGPASSWORD'] %>
+
+development:
+  <<: *default
+  database: CacApp_development
+
+test:
+  <<: *default
+  database: CacApp_test
+
+production:
+  <<: *default
+  database: CacApp_production
+  url: <%= ENV['DATABASE_URL'] %>
