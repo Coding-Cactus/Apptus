@@ -93,3 +93,49 @@ input[type='submit']:disabled {
     background-color: #4f644E !important;
     transform: scale(1) !important;
 }
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.flash {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    font-size: 18px;
+}
+
+.notice {
+    background-color: #55815199;
+    border-top: 2px solid #558151;
+    border-bottom: 2px solid #558151;
+}
+
+.alert {
+    background-color: #B7313AA5;
+    border-top: 2px solid #B7313A;
+    border-bottom: 2px solid #B7313A;
+}
+
+.flash button {
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.flash button:hover {
+    background-color: #FFFFFF18;
+}
+
+.flash svg {
+    height: 30px;
+    width: 30px;
+    display: block;
+}
