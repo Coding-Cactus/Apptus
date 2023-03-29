@@ -13,3 +13,83 @@
  *= require_tree .
  *= require_self
  */
+
+:root {
+    --main-bg: #344E41;
+    --secondary-bg: #588157;
+    --input-bg: #A3B18A;
+    --foreground: #DAD7CD;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--main-bg);
+}
+
+h2 {
+    font-size: 60px;
+}
+
+a {
+    border-radius: 3px;
+    color: var(--input-bg);
+}
+
+a:focus-visible {
+    outline: 2px dashed var(--secondary-bg);
+}
+
+label {
+    font-size: 25px;
+}
+
+input:not([type='checkbox']) {
+    background-color: var(--input-bg);
+    border: none;
+    border-radius: 9px;
+    font-size: 23px;
+    padding: 10px 13px;
+    width: 100%;
+}
+
+input::placeholder {
+    color: #6D805E;
+}
+
+input[type='submit'] {
+    cursor: pointer;
+    background-color: var(--secondary-bg);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+input[type='submit']:hover {
+    background-color: #5E8A5D;
+    transform: scale(1.025);
+}
+
+input:focus-visible {
+    outline: 2px solid var(--secondary-bg);
+}
+
+input[type='submit']:active {
+    background-color: #4C8C47;
+    transform: scale(1.04);
+}
+
+input[type='submit']:focus-visible {
+    outline-color: var(--input-bg);
+}
+
+input[type='submit']:disabled {
+    cursor: not-allowed !important;
+    background-color: #4f644E !important;
+    transform: scale(1) !important;
+}
