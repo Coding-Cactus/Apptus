@@ -11,13 +11,13 @@ default: &default
 
 development:
   <<: *default
-  database: CacApp_development
+  database: Apptus_development
 
 test:
   <<: *default
-  database: CacApp_test
+  database: Apptus_test
 
 production:
   <<: *default
-  database: CacApp_production
+  database: Apptus_production
   url: <%= ENV['DATABASE_URL'] %>
