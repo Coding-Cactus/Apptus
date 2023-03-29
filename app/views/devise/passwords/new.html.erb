@@ -1,7 +1,7 @@
 <div id="auth-container">
   <h2>Apptus</h2>
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, data: { controller: "double-click", action: "submit->disable" }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
