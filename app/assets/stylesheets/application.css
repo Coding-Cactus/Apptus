@@ -94,6 +94,11 @@ input[type='submit']:disabled {
     transform: scale(1) !important;
 }
 
+#error_explanation li {
+    list-style: none;
+    color: #f93d3d;
+}
+
 header {
     position: absolute;
     top: 0;

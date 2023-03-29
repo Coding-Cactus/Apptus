@@ -2,8 +2,6 @@
   <h2>Apptus</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
     <div class="field">
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>
@@ -23,6 +21,8 @@
       <%= f.label :password_confirmation, "Password Confirmation" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
     </div>
+
+    <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="actions">
       <%= f.submit "Register" %>
