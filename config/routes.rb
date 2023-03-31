@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'chats#index'
+  authenticated :user do
+    root 'chats#index', as: :authenticated_root
+  end
 
-  devise_for :users, skip: %i[sessions registrations passwords]
+  devise_for :users, skip: %i[sessions registrations passwords confirmations]
 
   devise_scope :user do
+    root 'devise/sessions#new'
+
     get    'login',  to: 'devise/sessions#new',     as: :new_user_session
     post   'login',  to: 'devise/sessions#create',  as: :user_session
     delete 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
@@ -23,5 +27,9 @@ Rails.application.routes.draw do
     patch 'set-password',   to: 'devise/passwords#update', as: :user_password
     get   'set-password',   to: 'devise/passwords#edit',   as: :edit_user_password
     get   'reset-password', to: 'devise/passwords#new',    as: :new_user_password
+
+    post 'confirm-email',       to: 'devise/confirmations#create'
+    get  'confirm-email',       to: 'devise/confirmations#show', as: :user_confirmation
+    get  'resend-confirmation', to: 'devise/confirmations#new',  as: :new_user_confirmation
   end
 end
