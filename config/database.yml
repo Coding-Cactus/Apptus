@@ -20,4 +20,5 @@ test:
 production:
   <<: *default
   database: Apptus_production
+  prepared_statements: false
   url: <%= ENV['DATABASE_URL'] %>
