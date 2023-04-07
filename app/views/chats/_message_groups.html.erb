@@ -1,0 +1,9 @@
+<% groups.each do |messages| %>
+  <div class="message-group <%= 'right' if messages[0].user_id == current_user.id %>">
+    <div>
+      <%= render messages %>
+    </div>
+
+    <%= render 'shared/icon', resource: messages[0].user, size: :medium unless messages[0].user.system? %>
+  </div>
+<% end %>

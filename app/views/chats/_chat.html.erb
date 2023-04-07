@@ -1,0 +1,19 @@
+<%= link_to chat, class: 'chat-preview' + if @rounded_top == chat.id
+                                            ' rounded-top'
+                                          elsif @rounded_bottom == chat.id
+                                            ' rounded-bottom'
+                                          elsif @selected == chat.id
+                                            ' selected'
+                                          else
+                                            ''
+                                          end do %>
+  <%= render 'shared/icon', resource: chat, size: :big %>
+
+  <div class="chat-preview-details">
+    <div class="chat-preview-header">
+      <span><%= chat.name %></span>
+      <span class="date"><%= nice_time(chat.last_message.created_at) if chat.last_message %></span>
+    </div>
+    <p><%= chat.last_message.content if chat.last_message %></p>
+  </div>
+<% end %>

@@ -44,10 +44,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    port: '587',
-    address: 'smtp.mailersend.net',
-    user_name: ENV['EMAIL_USERNAME'],
-    password:  ENV['EMAIL_PASSWORD']
+    port: 1025,
+    address: '127.0.0.1'
   }
 
   # Print deprecation notices to the Rails logger.

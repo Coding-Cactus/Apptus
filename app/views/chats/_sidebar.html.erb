@@ -1,0 +1,11 @@
+<nav id="chats-list">
+  <div id="chats-list-background-layer">
+    <%= render 'chats/header', header_rounded: header_rounded %>
+
+    <div id="list">
+      <%= render @chats, selected: selected, rounded_top: rounded_top, rounded_bottom: rounded_bottom %>
+
+      <div id="fake-chat-preview" <%= 'class="rounded-top"'.html_safe if footer_rounded %>></div>
+    </div>
+  </div>
+</nav>
