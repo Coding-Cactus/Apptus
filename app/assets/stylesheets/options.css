@@ -1,0 +1,179 @@
+#options-page {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    background-color: var(--foreground);
+}
+
+#options-list {
+    width: 400px;
+    background-color: var(--main-bg);
+}
+
+.list-background-layer {
+    width: 400px;
+    background-color: var(--foreground);
+}
+
+.rounded-top    { border-top-right-radius:    14px !important; }
+.rounded-bottom { border-bottom-right-radius: 14px !important; }
+
+#options-header {
+    justify-content: space-between;
+    font-size: 29px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 1px 4px 0 #00000035;
+}
+
+#options-header > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#options-header a {
+    background-color: transparent;
+    width: 45px;
+    height: 45px;
+    padding: 2px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#options-header a:hover {
+    background-color: #FFFFFF18;
+}
+
+.option, #options-header, #fake-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 0;
+    background-color: var(--main-bg);
+    text-decoration: none;
+}
+
+.option svg {
+    height: 40px;
+}
+
+.option.selected {
+    background-color: transparent;
+}
+
+.option.selected * {
+    color: var(--dark-text);
+}
+
+#fake-option {
+    height: 30px;
+    border-top-right-radius: 14px;
+}
+
+#options-section-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 40px 0;
+    position: relative;
+}
+
+#options-section-container.edit-details {
+    align-items: center;
+}
+
+#options-section-container > *:not(header) {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 40px 0;
+    width: 500px;
+}
+
+#options-section-container :not(input):not(a) {
+    color: var(--dark-text);
+}
+
+#options-section-container a {
+    color: var(--secondary-bg);
+}
+
+#options-page input {
+    width: 100%;
+}
+
+#options-section-container nav {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#contact-number-container, #options-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#contact-number-container > div, #options-page form > div {
+    display: flex;
+    gap: 10px;
+}
+
+#options-page form input {
+    width: 100%;
+}
+
+#contact-number-container button, #options-page form input[type='submit'] {
+    width: auto;
+    color: var(--foreground) !important;
+}
+
+#contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#contacts-list .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 21px;
+}
+
+#contacts-list .contact > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#contacts-list .contact a {
+    background-color: transparent;
+    width: 35px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#contacts-list .contact a:hover {
+    background-color: #FFFFFF18;
+}
+
+#contacts-list .contact a.accept svg, #contacts-list .contact a.accept path { color: #329630 }
+#contacts-list .contact a.reject svg, #contacts-list .contact a.reject path { color: #DD3030 }
+
+#contacts-list .contact .pfp span {
+    color: var(--foreground);
+}
+
+#contacts-list h3 {
+    font-size: 25px;
+    font-weight: normal;
+}

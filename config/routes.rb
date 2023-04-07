@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     root 'chats#index', as: :authenticated_root
   end
 
-  devise_for :users, skip: %i[sessions registrations passwords confirmations]
+  devise_for :users,
+             skip: %i[sessions registrations passwords confirmations],
+             controllers: { registrations: 'registrations' }
 
   devise_scope :user do
     root 'devise/sessions#new'
@@ -14,13 +16,14 @@ Rails.application.routes.draw do
     post   'login',  to: 'devise/sessions#create',  as: :user_session
     delete 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
 
-    put    'account',        to: 'devise/registrations#update'
-    delete 'account',        to: 'devise/registrations#destroy'
-    post   'account',        to: 'devise/registrations#create'
-    get    'register',       to: 'devise/registrations#new',    as: :new_user_registration
-    get    'account',        to: 'devise/registrations#edit',   as: :edit_user_registration
-    patch  'account',        to: 'devise/registrations#update', as: :user_registration
-    get    'account/cancel', to: 'devise/registrations#cancel', as: :cancel_user_registration
+    put    'account',        to: 'registrations#update'
+    delete 'account',        to: 'registrations#destroy'
+    post   'account',        to: 'registrations#create'
+    get    'register',       to: 'registrations#new',    as: :new_user_registration
+    get    'account',        to: 'registrations#edit',   as: :user_root
+    get    'account',        to: 'registrations#edit',   as: :edit_user_registration
+    patch  'account',        to: 'registrations#update', as: :user_registration
+    get    'account/cancel', to: 'registrations#cancel', as: :cancel_user_registration
 
     put   'set-password',   to: 'devise/passwords#update'
     post  'set-password',   to: 'devise/passwords#create'
@@ -32,4 +35,9 @@ Rails.application.routes.draw do
     get  'confirm-email',       to: 'devise/confirmations#show', as: :user_confirmation
     get  'resend-confirmation', to: 'devise/confirmations#new',  as: :new_user_confirmation
   end
+
+  resources :chats, only: %i[index show new create]
+
+  resources :contacts, only: %i[index create update destroy]
+  get 'contacts/pending', to: 'contacts#new', as: :pending_contacts
 end

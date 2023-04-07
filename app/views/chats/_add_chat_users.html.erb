@@ -1,0 +1,15 @@
+<div id="members-list">
+  <h3>Members</h3>
+
+  <%= link_to 'Add new contacts', pending_contacts_path %>
+
+  <% contacts.each do |contact| %>
+    <div>
+      <%= form.check_box :users, { multiple: true }, contact.id, nil %>
+      <%= form.label :users, for: "chat_users_#{contact.id}" do %>
+        <%= render 'shared/icon', resource: contact, size: 'small' %>
+        <span><%= contact.title_name %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

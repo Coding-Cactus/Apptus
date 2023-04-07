@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Apptus</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div id="chat-page">
+      <%= render 'chats/sidebar',
+                 selected: @selected,
+                 header_rounded: @header_rounded,
+                 footer_rounded: @footer_rounded,
+                 rounded_top: @rounded_top,
+                 rounded_bottom: @rounded_bottom %>
+
+      <div id="chat">
+        <header>
+          <%= render 'layouts/flashes' %>
+        </header>
+
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

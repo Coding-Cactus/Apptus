@@ -1,0 +1,27 @@
+<div>
+  <nav>
+    <%= link_to 'Contacts', contacts_path %>
+    <strong>Pending</strong>
+  </nav>
+
+  <%= form_with model: @new_contact, data: { controller: "double-click", action: "submit->doubleClick#disable" }  do |form| %>
+    <%= form.label :contact_number, 'Add Contact' %>
+
+    <div>
+      <%= form.text_field :contact_number, placeholder: 'Contact Number', required: true, minlength: 12, maxlength: 14, autocomplete: 'off' %>
+      <%= form.submit 'Add' %>
+    </div>
+  <% end %>
+
+  <div id="contacts-list">
+    <% if @incoming_requests.length > 0 %>
+      <h3>Incoming Requests</h3>
+      <%= render 'contacts', contacts: @incoming_requests, request_type: :incoming %>
+    <% end %>
+
+    <% if @outgoing_requests.length > 0 %>
+      <h3>Outgoing Requests</h3>
+      <%= render 'contacts', contacts: @outgoing_requests, request_type: :outgoing %>
+    <% end %>
+  </div>
+</div>

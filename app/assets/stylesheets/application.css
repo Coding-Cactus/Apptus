@@ -19,6 +19,7 @@
     --secondary-bg: #588157;
     --input-bg: #A3B18A;
     --foreground: #DAD7CD;
+    --dark-text: #2E2F30;
 }
 
 * {
@@ -51,7 +52,7 @@ label {
     font-size: 25px;
 }
 
-input:not([type='checkbox']) {
+input:not([type='checkbox']), button {
     background-color: var(--input-bg);
     border: none;
     border-radius: 9px;
@@ -64,39 +65,78 @@ input::placeholder {
     color: #6D805E;
 }
 
-input[type='submit'] {
+input[type='submit'], button {
     cursor: pointer;
     background-color: var(--secondary-bg);
     transition: background-color 0.3s, transform 0.3s;
 }
 
-input[type='submit']:hover {
+input[type='submit']:hover, button:hover {
     background-color: #5E8A5D;
     transform: scale(1.025);
 }
 
-input:focus-visible {
+input:focus-visible, button:focus-visible {
     outline: 2px solid var(--secondary-bg);
 }
 
-input[type='submit']:active {
+input[type='submit']:active, button:active {
     background-color: #4C8C47;
     transform: scale(1.04);
 }
 
-input[type='submit']:focus-visible {
+input[type='submit']:focus-visible, button:focus-visible  {
     outline-color: var(--input-bg);
 }
 
-input[type='submit']:disabled {
+input[type='submit']:disabled, button:disabled {
     cursor: not-allowed !important;
     background-color: #4f644E !important;
     transform: scale(1) !important;
 }
 
+input[type='checkbox'] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #F1FDE8;
+    padding: 11px;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+}
+
+input[type='checkbox']:focus-visible, input[type='checkbox']:checked:focus-visible {
+    outline: 2px dashed var(--secondary-bg);
+}
+
+input[type='checkbox']:checked {
+    background-color: var(--input-bg);
+    color: #F1FDE8;
+}
+
+input[type='checkbox']:checked:after {
+    content: '\2714';
+    font-size: 25px;
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    color: #F1FDE8;
+}
+
+input[type='checkbox'].login {
+    padding: 7px;
+    border-radius: 3px;
+}
+
+input[type='checkbox'].login:checked:after {
+    font-size: 17px;
+    top: -3px;
+    left: 0;
+}
+
 #error_explanation li {
     list-style: none;
-    color: #f93d3d;
+    color: #f93d3d !important;
 }
 
 header {
@@ -104,15 +144,20 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 10;
 }
 
 .flash {
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
     font-size: 18px;
+}
+
+.flash * {
+    color: var(--foreground) !important;
 }
 
 .notice {
@@ -128,6 +173,8 @@ header {
 }
 
 .flash button {
+    width: auto;
+    padding: 2px;
     border: none;
     background-color: transparent;
     border-radius: 5px;
@@ -144,3 +191,21 @@ header {
     width: 30px;
     display: block;
 }
+
+.pfp {
+    font-size: 80%;
+    aspect-ratio: 1 / 1;
+    border-radius: 1000000000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.pfp.small  { height: 30px; }
+.pfp.medium { height: 40px; }
+.pfp.big    { height: 50px; }
+
+.pfp.small  span { font-size: 12px; }
+.pfp.medium span { font-size: 18px; }
+.pfp.big    span { font-size: 22px; }

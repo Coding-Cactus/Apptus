@@ -1,0 +1,23 @@
+<% if message.user.system? %>
+  <div class="system-message">
+    <span><%= message.content %></span>
+    <span><%= nice_time(message.created_at) %></span>
+  </div>
+<% else %>
+  <div class="message">
+    <p><%= message.content %></p>
+
+    <div class="msg-info">
+      <span><%= nice_time(message.created_at) %></span>
+
+      <% case message.lowest_status %>
+      <% when 'read' %>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M464 128L240 384l-96-96M144 384l-96-96M368 128L232 284"/></svg>
+      <% when 'received' %>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128L192 384l-96-96"/></svg>
+      <% else %>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 128v144h96"/></svg>
+      <% end %>
+    </div>
+  </div>
+<% end %>

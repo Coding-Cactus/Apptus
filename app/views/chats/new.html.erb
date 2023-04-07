@@ -1,0 +1,22 @@
+<div id="new-chat-form-container">
+  <%= form_with model: @chat, data: { controller: "double-click", action: "submit->doubleClick#disable" } do |form| %>
+    <div id="new-chat-name">
+      <%= form.label :name %>
+
+      <div>
+        <%= form.text_field :name, placeholder: 'Chat Name', required: true %>
+        <%= form.submit 'Create' %>
+      </div>
+
+      <div id="error_explanation" data-turbo-cache="false">
+        <ul>
+          <% @chat.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <%= render 'add_chat_users', contacts: @contacts, form: form %>
+  <% end %>
+</div>

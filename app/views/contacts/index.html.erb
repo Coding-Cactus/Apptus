@@ -1,0 +1,18 @@
+<div>
+  <nav>
+    <strong>Contacts</strong>
+    <%= link_to 'Pending', pending_contacts_path %>
+  </nav>
+
+  <div id="contact-number-container">
+    <label for="contact-number">Your Contact Number</label>
+    <div data-controller="copy">
+      <input type="text" id="contact-number" value="<%= current_user.nice_contact_number %>" data-copy-target="input"  readonly />
+      <button data-action="click->copy#copy">Copy</button>
+    </div>
+  </div>
+
+  <div id="contacts-list">
+    <%= render 'contacts', contacts: @contacts, request_type: :accepted %>
+  </div>
+</div>
