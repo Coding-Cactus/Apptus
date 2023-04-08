@@ -1,14 +1,14 @@
 <% if message.user.system? %>
   <div class="system-message">
     <span><%= message.content %></span>
-    <span><%= nice_time(message.created_at) %></span>
+    <span data-controller="nice-date" class="hidden"><%= message.created_at.to_i %></span>
   </div>
 <% else %>
   <div class="message">
     <p><%= message.content %></p>
 
     <div class="msg-info">
-      <span><%= nice_time(message.created_at) %></span>
+      <span data-controller="nice-date" class="hidden"><%= message.created_at.to_i %></span>
 
       <% case message.lowest_status %>
       <% when 'read' %>

@@ -5,8 +5,8 @@ class ChatsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_chat, only: :show
   before_action :load_chats, except: :destroy
+  before_action :can_view_chat?, only: %i[show update destroy]
   before_action :handle_selection, except: :destroy
-
   def index; end
 
   def show
@@ -60,6 +60,10 @@ class ChatsController < ApplicationController
 
   def new_chat_params
     params.require(:chat).permit(:name, users: [])
+  end
+
+  def can_view_chat?
+    not_found unless ChatMember.exists?(user_id: current_user.id, chat_id: params[:id])
   end
 
   def handle_selection

@@ -12,8 +12,8 @@
   <div class="chat-preview-details">
     <div class="chat-preview-header">
       <span><%= chat.name %></span>
-      <span class="date"><%= nice_time(chat.last_message.created_at) if chat.last_message %></span>
+      <span data-controller="nice-date" class="date hidden"><%= chat.last_message.created_at.to_i %></span>
     </div>
-    <p><%= chat.last_message.content if chat.last_message %></p>
+    <p><%= chat.last_message.content %></p>
   </div>
 <% end %>
