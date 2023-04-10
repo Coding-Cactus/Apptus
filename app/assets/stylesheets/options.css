@@ -15,8 +15,13 @@
     background-color: var(--foreground);
 }
 
-.rounded-top    { border-top-right-radius:    14px !important; }
-.rounded-bottom { border-bottom-right-radius: 14px !important; }
+.rounded-top, .rounded-top turbo-frame {
+    border-top-right-radius: 14px !important;
+}
+
+.rounded-bottom, .rounded-bottom turbo-frame {
+    border-bottom-right-radius: 14px !important;
+}
 
 #options-header {
     justify-content: space-between;

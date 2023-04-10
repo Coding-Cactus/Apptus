@@ -10,9 +10,10 @@ class ChatsController < ApplicationController
   def index; end
 
   def show
-    @message_groups = @chat.messages.includes(:user, :statuses).limit(20).order(created_at: :asc)
-                           .reduce([]) do |groups, msg|
-                             if groups == [] || groups[-1][-1].user_id != current_user.id
+    @message = @chat.messages.build
+    @message_groups = @chat.messages.includes(:user, :statuses).order(created_at: :desc).limit(50)
+                           .reverse.reduce([]) do |groups, msg|
+                             if groups == [] || groups[-1][-1].user_id != msg.user_id
                                groups += [[msg]]
                              else
                                groups[-1] += [msg]

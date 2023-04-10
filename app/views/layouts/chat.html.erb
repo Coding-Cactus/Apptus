@@ -6,12 +6,45 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name="turbo-cache-control" content="no-cache">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <style>
+        .message-container[data-user-id="<%= current_user.id %>"] .message {
+            border-radius: 7px 0 0 7px;
+        }
+
+      .message-container[data-user-id="<%= current_user.id %>"] .message-and-triangle {
+          flex-direction: row-reverse;
+      }
+
+      .message-container[data-user-id="<%= current_user.id %>"] .message-and-triangle svg {
+          transform: rotateY(180deg) translateX(1px);
+      }
+
+      .message-container[data-user-id="<%= current_user.id %>"].bottom .message { border-bottom-right-radius: 7px; }
+
+      .message-container[data-user-id="<%= current_user.id %>"] .message-stack {
+          align-items: flex-end;
+      }
+      .message-container[data-user-id="<%= current_user.id %>"] {
+          flex-direction: row-reverse;
+      }
+
+      .message-container[data-user-id="<%= current_user.id %>"] .msg-info {
+          flex-direction: row-reverse;
+      }
+
+      .message-container:not([data-user-id="<%= current_user.id %>"]) .msg-info svg {
+          display: none;
+      }
+    </style>
   </head>
 
   <body>

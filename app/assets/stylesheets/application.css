@@ -209,7 +209,3 @@ header {
 .pfp.small  span { font-size: 12px; }
 .pfp.medium span { font-size: 18px; }
 .pfp.big    span { font-size: 22px; }
-
-.hidden {
-    display: none;
-}

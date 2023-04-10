@@ -36,7 +36,9 @@ Rails.application.routes.draw do
     get  'resend-confirmation', to: 'devise/confirmations#new',  as: :new_user_confirmation
   end
 
-  resources :chats, only: %i[index show new create]
+  resources :chats, only: %i[index show new create] do
+    resources :messages, only: :create
+  end
 
   resources :contacts, only: %i[index create update destroy]
   get 'contacts/pending', to: 'contacts#new', as: :pending_contacts

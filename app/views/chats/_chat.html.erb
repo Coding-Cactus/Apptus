@@ -1,18 +1,10 @@
-<%= link_to chat, class: 'chat-preview' + if @rounded_top == chat.id
-                                            ' rounded-top'
-                                          elsif @rounded_bottom == chat.id
-                                            ' rounded-bottom'
-                                          elsif @selected == chat.id
-                                            ' selected'
-                                          else
-                                            ''
-                                          end do %>
+<%= turbo_frame_tag dom_id(chat), data: (from_stream ? { controller: 'sort-chats', turbo_temporary: 'true' } : {}) do %>
   <%= render 'shared/icon', resource: chat, size: :big %>
 
   <div class="chat-preview-details">
     <div class="chat-preview-header">
       <span><%= chat.name %></span>
-      <span data-controller="nice-date" class="date hidden"><%= chat.last_message.created_at.to_i %></span>
+      <span data-controller="nice-date" data-timestamp="<%= chat.last_message.created_at.to_i %>" class="date"></span>
     </div>
     <p><%= chat.last_message.content %></p>
   </div>
