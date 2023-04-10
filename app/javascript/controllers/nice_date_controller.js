@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     connect() {
         const now = new Date()
-        const date = new Date(Number(this.element.innerText) * 1000)
+        const date = new Date(Number(this.element.getAttribute("data-timestamp")) * 1000)
 
         if (
             date.getDate()     === now.getDate()  &&
@@ -18,7 +18,5 @@ export default class extends Controller {
         }
 
         if (this.element.innerText === "Invalid Date") this.element.innerText = ""
-
-        this.element.classList.remove("hidden")
     }
 }
