@@ -182,6 +182,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    redis (4.8.1)
     regexp_parser (2.7.0)
     reline (0.3.2)
       io-console (~> 0.5)
@@ -257,6 +258,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
+  redis (~> 4.0)
   rubocop
   selenium-webdriver
   sprockets-rails
