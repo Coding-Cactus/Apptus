@@ -8,7 +8,7 @@
     <%= form.label :contact_number, 'Add Contact' %>
 
     <div>
-      <%= form.text_field :contact_number, placeholder: 'Contact Number', required: true, minlength: 12, maxlength: 14, autocomplete: 'off' %>
+      <%= form.text_field :contact_number, autofocus: true, placeholder: 'Contact Number', required: true, minlength: 12, maxlength: 14, autocomplete: 'off' %>
       <%= form.submit 'Add' %>
     </div>
   <% end %>

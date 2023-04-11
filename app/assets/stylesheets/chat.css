@@ -71,7 +71,7 @@
     border-radius: 0;
 }
 
-.chat-preview turbo-frame {
+.chat-preview > div {
     display: flex;
     align-items: center;
     gap: 18px;
@@ -97,7 +97,7 @@
     font-size: 14px;
 }
 
-.chat-preview.selected turbo-frame {
+.chat-preview.selected > div {
     background-color: transparent;
 }
 

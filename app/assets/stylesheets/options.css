@@ -15,11 +15,11 @@
     background-color: var(--foreground);
 }
 
-.rounded-top, .rounded-top turbo-frame {
+.rounded-top, .rounded-top > div{
     border-top-right-radius: 14px !important;
 }
 
-.rounded-bottom, .rounded-bottom turbo-frame {
+.rounded-bottom, .rounded-bottom > div {
     border-bottom-right-radius: 14px !important;
 }
 

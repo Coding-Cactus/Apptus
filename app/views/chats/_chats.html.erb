@@ -1,13 +1,15 @@
 <% chats.each do |chat| %>
-  <%= link_to chat, class: 'chat-preview' + if @rounded_top == chat.id
-                                              ' rounded-top'
-                                            elsif @rounded_bottom == chat.id
-                                              ' rounded-bottom'
-                                            elsif @selected == chat.id
-                                              ' selected'
-                                            else
-                                              ''
-                                            end do %>
+  <%= link_to chat,
+              data: { turbo_frame: 'chat', controller: 'open-chat', action: 'click->open-chat#open' },
+              class: 'chat-preview' + if @rounded_top == chat.id
+                                        ' rounded-top'
+                                      elsif @rounded_bottom == chat.id
+                                        ' rounded-bottom'
+                                      elsif @selected == chat.id
+                                        ' selected'
+                                      else
+                                        ''
+                                      end do %>
    <%= render chat, from_stream: false %>
   <% end %>
 <% end %>

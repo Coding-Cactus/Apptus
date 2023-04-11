@@ -30,10 +30,19 @@ class Chat < ApplicationRecord
 
   def initials = name.split.first(2).map { |w| w[0] }.join.upcase
 
-  def add_users(user_ids)
-    user_ids.each do |id|
-      user = User.find(id)
-      users << user unless user.nil?
-    end
+  def add_users(current_user, user_ids)
+    members = users.map(&:id)
+    contacts = current_user.contacts.map { |c| [c.creator_id, c.target_id] }.flatten.uniq
+
+    user_ids.each { |id| add_user(id, members, contacts) }
+  end
+
+  private
+
+  def add_user(id, members, contacts)
+    return if members.include?(id) || !contacts.include?(id)
+
+    user = User.find(id)
+    users << user unless user.nil?
   end
 end

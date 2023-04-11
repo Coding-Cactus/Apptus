@@ -1,5 +1,5 @@
 <%= turbo_stream_from @chat, 'messages' %>
-<div id='messages' data-controller="scroll">
+<div id="messages" data-controller="scroll">
   <%= render 'message_groups', groups: @message_groups %>
 </div>
 

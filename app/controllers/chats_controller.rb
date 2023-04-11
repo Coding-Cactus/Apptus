@@ -30,7 +30,7 @@ class ChatsController < ApplicationController
   def create
     @chat = Chat.new(name: new_chat_params[:name])
 
-    @chat.add_users([current_user.id] + new_chat_params[:users].to_a)
+    @chat.add_users(current_user, [current_user.id] + new_chat_params[:users].to_a)
 
     if @chat.save
       flash[:notice] = 'Chat successfully created'
