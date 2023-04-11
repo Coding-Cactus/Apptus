@@ -56,13 +56,13 @@
                  rounded_top: @rounded_top,
                  rounded_bottom: @rounded_bottom %>
 
-      <div id="chat">
+      <%= turbo_frame_tag 'chat' do %>
         <header>
           <%= render 'layouts/flashes' %>
         </header>
 
         <%= yield %>
-      </div>
+      <% end %>
     </div>
   </body>
 </html>

@@ -9,8 +9,8 @@ export default class extends Controller {
 
         if (above === null) return
 
-        document.querySelector(".rounded-bottom").classList.remove("rounded-bottom")
-        document.querySelector(".rounded-top").classList.remove("rounded-top")
+        document.querySelector(".rounded-bottom")?.classList.remove("rounded-bottom")
+        document.querySelector(".rounded-top")?.classList.remove("rounded-top")
 
         const timestamp = Number(chat.querySelector(".date").getAttribute("data-timestamp"))
 

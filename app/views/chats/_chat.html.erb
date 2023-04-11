@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(chat), data: (from_stream ? { controller: 'sort-chats', turbo_temporary: 'true' } : {}) do %>
+<div id="<%= dom_id(chat) %>" <%= 'data-controller="sort-chats"'.html_safe if from_stream %>>
   <%= render 'shared/icon', resource: chat, size: :big %>
 
   <div class="chat-preview-details">
@@ -8,4 +8,4 @@
     </div>
     <p><%= chat.last_message.content %></p>
   </div>
-<% end %>
+</div>
