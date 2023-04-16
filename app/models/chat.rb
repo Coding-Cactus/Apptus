@@ -1,6 +1,8 @@
 class Chat < ApplicationRecord
   has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
 
+  has_one :owner, class_name: 'User'
+
   has_many :messages, dependent: :destroy
   has_many :chat_members, dependent: :destroy
   has_many :users, through: :chat_members
@@ -8,6 +10,17 @@ class Chat < ApplicationRecord
   validates :name, presence: true, length: { in: 1..30 }
   validates :colour, allow_blank: true, format: /#[A-F0-9]{6}/
   validates :users, length: { minimum: 2, message: 'must be more than just yourself' }
+
+  after_create_commit do
+    users.each do |user|
+      broadcast_prepend_later_to(
+        "user_#{user.id}_chats",
+        target: 'list',
+        partial: 'chats/chat_preview',
+        locals: { from_stream: true, new_chat: true }
+      )
+    end
+  end
 
   after_update_commit do
     users.each do |user|
@@ -30,11 +43,20 @@ class Chat < ApplicationRecord
 
   def initials = name.split.first(2).map { |w| w[0] }.join.upcase
 
-  def add_users(current_user, user_ids)
-    members = users.map(&:id)
-    contacts = current_user.contacts.map { |c| [c.creator_id, c.target_id] }.flatten.uniq
+  def add_initial_users(current_user, user_ids)
+    members = users.select(:id).map(&:id)
+    contacts = current_user.contacts.select(:id).map(&:id)
 
+    users << current_user
     user_ids.each { |id| add_user(id, members, contacts) }
+  end
+
+  def administrators
+    User.joins(:chat_members).where(chat_members: { chat_id: id, role: :administrator })
+  end
+
+  def administrator_ids
+    @administrator_ids ||= administrators.map(&:id)
   end
 
   private

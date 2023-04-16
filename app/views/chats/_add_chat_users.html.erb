@@ -1,7 +1,7 @@
 <div id="members-list">
   <h3>Members</h3>
 
-  <%= link_to 'Add new contacts', pending_contacts_path, data: { turbo_frame: '_top' } %>
+  <%= link_to '+ Add new contacts', pending_contacts_path, data: { turbo_frame: '_top' } %>
 
   <% contacts.each do |contact| %>
     <div>

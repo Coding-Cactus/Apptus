@@ -1,0 +1,15 @@
+<div class="chat-preview<%= if @rounded_top == chat.id
+                              ' rounded-top'
+                            elsif @rounded_bottom == chat.id
+                              ' rounded-bottom'
+                            elsif @selected == chat.id
+                              ' selected'
+                            else
+                              ''
+                            end %>"
+     data-controller="open-chat<%= ' new-chat' if new_chat %>" data-open-chat-target="chat">
+  <%= link_to '', chat,
+              data: { turbo_frame: 'chat', action: 'click->open-chat#open' },
+              class: 'link-blanket' %>
+  <%= render chat, from_stream: false %>
+</div>

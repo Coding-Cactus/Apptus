@@ -15,10 +15,10 @@
   </head>
 
   <body>
-    <div id="options-page">
+    <div id="app-page">
       <%= render 'shared/options_sidebar', selected: @selected %>
 
-      <div id="options-section-container">
+      <div class="page-content">
         <header>
           <%= render 'layouts/flashes' %>
         </header>
@@ -26,6 +26,5 @@
         <%= yield %>
       </div>
     </div>
-
   </body>
 </html>

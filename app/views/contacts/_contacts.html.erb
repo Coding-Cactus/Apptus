@@ -1,4 +1,4 @@
-<% contacts.each do |id, contact| %>
+<% contacts.each do |contact| %>
   <div class="contact">
     <div>
       <%= render 'shared/icon', resource: contact, size: 'small' %>
@@ -7,12 +7,12 @@
     <% if request_type != :accepted %>
       <div>
         <% if request_type == :incoming %>
-          <%= link_to contact_path(id), class: 'accept', data: { turbo_method: :put } do %>
+          <%= link_to contact_path(contact.id), class: 'accept', data: { turbo_method: :put } do %>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128L192 384l-96-96"/></svg>
           <% end %>
         <% end %>
 
-        <%= link_to contact_path(id), class: 'reject', data: { turbo_method: :delete } do %>
+        <%= link_to contact_path(contact.id), class: 'reject', data: { turbo_method: :delete } do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
         <% end %>
       </div>

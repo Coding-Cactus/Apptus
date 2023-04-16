@@ -1,0 +1,36 @@
+<div id="members-list">
+  <h3>Members</h3>
+
+  <% if chat.owner_id == current_user.id || chat.administrator_ids.include?(current_user.id) %>
+    <%= link_to '+ Add a new members', new_chat_chat_member_path(@chat), id: 'new-member' %>
+  <% end %>
+
+  <% members.each do |member| %>
+    <div class="member">
+      <div>
+        <%= render 'shared/icon', resource: member.user, size: :small %>
+
+        <span><%= member.user.title_name %></span>
+      </div>
+
+      <% if current_user.id != member.user_id && (
+          chat.owner_id == current_user.id || (
+              chat.administrator_ids.include?(current_user.id) &&
+                !chat.administrator_ids.include?(member.user_id) &&
+                member.user_id != chat.owner_id
+            )
+        ) %>
+        <div>
+          <%= link_to chat_chat_member_path(chat, member),
+                      data: {
+                        turbo_method: 'delete',
+                        turbo_confirm: "Are you sure you want to remove #{member.user.title_name} from this chat?"
+                      },
+                      class: 'remove' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

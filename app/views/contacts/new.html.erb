@@ -7,7 +7,7 @@
   <%= form_with model: @new_contact, data: { controller: "double-click", action: "submit->doubleClick#disable" }  do |form| %>
     <%= form.label :contact_number, 'Add Contact' %>
 
-    <div>
+    <div class="inline-submit">
       <%= form.text_field :contact_number, autofocus: true, placeholder: 'Contact Number', required: true, minlength: 12, maxlength: 14, autocomplete: 'off' %>
       <%= form.submit 'Add' %>
     </div>
