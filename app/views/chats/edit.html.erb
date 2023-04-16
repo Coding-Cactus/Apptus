@@ -1,4 +1,5 @@
 <div>
+  <% if @chat.owner_id == current_user.id || @chat.administrators.include?(current_user) %>
     <%= form_with model: @chat, id: 'edit-chat-name' do |form| %>
       <%= form.label :name %>
 
@@ -16,6 +17,7 @@
         </ul>
       </div>
     <% end %>
+  <% end %>
 
-    <%= render 'members', chat: @chat, members: @members %>
+  <%= render 'members', chat: @chat, members: @members %>
 </div>
