@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
     connect() {
+        this.element.removeAttribute("data-controller") // Stop infinite loop after chat is moved
+
         const chat = this.element.parentElement
 
         let above = chat.previousElementSibling

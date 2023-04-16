@@ -5,13 +5,14 @@ class User < ApplicationRecord
 
   has_many :statuses, dependent: :destroy
   has_many :messages, dependent: :destroy
+
   has_many :chat_members, dependent: :destroy
   has_many :chats, through: :chat_members
 
-  has_many :incoming_contact_requests,
-           -> { where(status: 'pending') }, foreign_key: 'target_id',  class_name: 'Contact', dependent: :destroy
-  has_many :outgoing_contact_requests,
-           -> { where(status: 'pending') }, foreign_key: 'creator_id', class_name: 'Contact', dependent: :destroy
+  has_many :owned_chats, foreign_key: 'owner_id', class_name: 'Chat'
+
+  has_many :incoming_contacts, foreign_key: 'target_id',  class_name: 'Contact', dependent: :destroy
+  has_many :outgoing_contacts, foreign_key: 'creator_id', class_name: 'Contact', dependent: :destroy
 
   enum role: %i[basic admin system]
 
@@ -31,8 +32,22 @@ class User < ApplicationRecord
   def initials   = name.split.first(2).map(&:chr).join.upcase
   def nice_contact_number = contact_number.chars.each_slice(4).map(&:join).join('-')
 
+  def incoming_contact_requests
+    User.joins(:outgoing_contacts).where(outgoing_contacts: { target_id: id, status: :pending })
+  end
+
+  def outgoing_contact_requests
+    User.joins(:incoming_contacts).where(incoming_contacts: { creator_id: id, status: :pending })
+  end
+
   def contacts
-    Contact.where(target_id: id, status: 'accepted').or(Contact.where(creator_id: id, status: 'accepted'))
+    User.joins(:incoming_contacts).where(incoming_contacts: { creator_id: id, status: :accepted })
+        .union(User.joins(:outgoing_contacts).where(outgoing_contacts: { target_id: id, status: :accepted }))
+  end
+
+  def find_contact(contact_user_id)
+    Contact.where(creator_id: id, target_id: contact_user_id)
+           .or(Contact.where(creator_id: contact_user_id, target_id: id)).first
   end
 
   protected

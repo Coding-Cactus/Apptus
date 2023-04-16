@@ -1,26 +1,11 @@
-#options-page {
-    display: flex;
-    width: 100%;
-    min-height: 100%;
-    background-color: var(--foreground);
-}
-
 #options-list {
-    width: 400px;
+    width: var(--list-width);
     background-color: var(--main-bg);
 }
 
 .list-background-layer {
-    width: 400px;
+    width: var(--list-width);
     background-color: var(--foreground);
-}
-
-.rounded-top, .rounded-top > div{
-    border-top-right-radius: 14px !important;
-}
-
-.rounded-bottom, .rounded-bottom > div {
-    border-bottom-right-radius: 14px !important;
 }
 
 #options-header {
@@ -38,6 +23,7 @@
 }
 
 #options-header a {
+    color: var(--foreground);
     background-color: transparent;
     width: 45px;
     height: 45px;
@@ -58,6 +44,7 @@
     gap: 10px;
     padding: 7px 10px;
     border-radius: 0;
+    color: var(--foreground);
     background-color: var(--main-bg);
     text-decoration: none;
 }
@@ -67,11 +54,8 @@
 }
 
 .option.selected {
-    background-color: transparent;
-}
-
-.option.selected * {
     color: var(--dark-text);
+    background-color: transparent;
 }
 
 #fake-option {
@@ -79,63 +63,24 @@
     border-top-right-radius: 14px;
 }
 
-#options-section-container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 40px 0;
-    position: relative;
-}
-
-#options-section-container.edit-details {
-    align-items: center;
-}
-
-#options-section-container > *:not(header) {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 40px 0;
-    width: 500px;
-}
-
-#options-section-container :not(input):not(a) {
-    color: var(--dark-text);
-}
-
-#options-section-container a {
-    color: var(--secondary-bg);
-}
-
-#options-page input {
-    width: 100%;
-}
-
-#options-section-container nav {
-    font-size: 25px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#contact-number-container, #options-page form {
+#contact-number-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#contact-number-container > div, #options-page form > div {
+.inline-submit {
     display: flex;
     gap: 10px;
 }
 
-#options-page form input {
-    width: 100%;
-}
-
-#contact-number-container button, #options-page form input[type='submit'] {
+form .inline-submit input[type='submit'] {
     width: auto;
-    color: var(--foreground) !important;
+}
+
+#contact-number-container button {
+    width: auto;
+    color: var(--foreground);
 }
 
 #contacts-list {
@@ -173,10 +118,6 @@
 
 #contacts-list .contact a.accept svg, #contacts-list .contact a.accept path { color: #329630 }
 #contacts-list .contact a.reject svg, #contacts-list .contact a.reject path { color: #DD3030 }
-
-#contacts-list .contact .pfp span {
-    color: var(--foreground);
-}
 
 #contacts-list h3 {
     font-size: 25px;

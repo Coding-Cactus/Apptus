@@ -48,7 +48,7 @@
   </head>
 
   <body>
-    <div id="chat-page">
+    <div id="app-page">
       <%= render 'chats/sidebar',
                  selected: @selected,
                  header_rounded: @header_rounded,
@@ -56,7 +56,7 @@
                  rounded_top: @rounded_top,
                  rounded_bottom: @rounded_bottom %>
 
-      <%= turbo_frame_tag 'chat' do %>
+      <%= turbo_frame_tag 'chat', class: 'page-content' do %>
         <header>
           <%= render 'layouts/flashes' %>
         </header>

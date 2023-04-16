@@ -1,0 +1,21 @@
+<div>
+    <%= form_with model: @chat, id: 'edit-chat-name' do |form| %>
+      <%= form.label :name %>
+
+      <div class="inline-submit">
+        <%= form.text_field :name, autofocus: true, autocomplete: 'off', placeholder: 'Chat name', required: true %>
+
+        <%= form.submit 'Update' %>
+      </div>
+
+      <div id="error_explanation" data-turbo-cache="false">
+        <ul>
+          <% @chat.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= render 'members', chat: @chat, members: @members %>
+</div>

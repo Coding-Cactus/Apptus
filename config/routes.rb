@@ -36,8 +36,9 @@ Rails.application.routes.draw do
     get  'resend-confirmation', to: 'devise/confirmations#new',  as: :new_user_confirmation
   end
 
-  resources :chats, only: %i[index show new create] do
+  resources :chats, only: %i[index show new create edit update] do
     resources :messages, only: :create
+    resources :chat_members, only: %i[new create update destroy]
   end
 
   resources :contacts, only: %i[index create update destroy]

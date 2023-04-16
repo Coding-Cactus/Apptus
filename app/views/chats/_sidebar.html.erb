@@ -4,7 +4,7 @@
 
     <%= turbo_stream_from "#{dom_id(current_user)}_chats" %>
     <div id="list">
-      <%= render 'chats', chats: @chats, selected: selected, rounded_top: rounded_top, rounded_bottom: rounded_bottom %>
+      <%= render 'chats/chats', chats: @chats, selected: selected, rounded_top: rounded_top, rounded_bottom: rounded_bottom %>
 
       <div id="fake-chat-preview" <%= 'class="rounded-top"'.html_safe if footer_rounded %>></div>
     </div>

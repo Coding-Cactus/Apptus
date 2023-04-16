@@ -6,7 +6,7 @@
 
   <div id="contact-number-container">
     <label for="contact-number">Your Contact Number</label>
-    <div data-controller="copy">
+    <div data-controller="copy" class="inline-submit">
       <input type="text" id="contact-number" value="<%= current_user.nice_contact_number %>" data-copy-target="input"  readonly />
       <button data-action="click->copy#copy">Copy</button>
     </div>

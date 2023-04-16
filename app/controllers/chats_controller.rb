@@ -1,36 +1,34 @@
 # frozen_string_literal: true
+
 class ChatsController < ApplicationController
   layout 'chat'
 
   before_action :authenticate_user!
-  before_action :load_chat, only: :show
+  before_action :load_chat, only: %i[show edit update]
   before_action :load_chats, except: :destroy
-  before_action :can_view_chat?, only: %i[show update destroy]
+  before_action :can_view_chat?, only: %i[show edit update destroy]
+  before_action :owner?, only: :destroy
+  before_action :admin_or_owner?, only: :update
   before_action :handle_selection, except: :destroy
+
   def index; end
 
   def show
+    @show_page = true
     @message = @chat.messages.build
     @message_groups = @chat.messages.includes(:user, :statuses).order(created_at: :desc).limit(50)
-                           .reverse.reduce([]) do |groups, msg|
-                             if groups == [] || groups[-1][-1].user_id != msg.user_id
-                               groups += [[msg]]
-                             else
-                               groups[-1] += [msg]
-                             end
-                             groups
-                           end
+                           .reverse.reduce([]) { |groups, msg| group_up_message(groups, msg) }
   end
 
   def new
-    @chat = Chat.new
+    @chat = current_user.owned_chats.build
     @contacts = contacts
   end
 
   def create
-    @chat = Chat.new(name: new_chat_params[:name])
+    @chat = current_user.owned_chats.new(name: new_chat_params[:name])
 
-    @chat.add_users(current_user, [current_user.id] + new_chat_params[:users].to_a)
+    @chat.add_initial_users(current_user, new_chat_params[:users].to_a.map(&:to_i))
 
     if @chat.save
       flash[:notice] = 'Chat successfully created'
@@ -41,14 +39,28 @@ class ChatsController < ApplicationController
     end
   end
 
+  def edit
+    @members = @chat.chat_members.includes(:user)
+  end
+
+  def update
+    if @chat.update(new_chat_params)
+      flash[:notice] = 'Chat updated'
+      redirect_to edit_chat_path(@chat)
+    else
+      @members = @chat.chat_members.includes(:user)
+
+      flash.now[:alert] = 'Something went wrong when updating the chat'
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy; end
 
   private
 
   def contacts
-    current_user.contacts.includes(:creator, :target)
-                .map { |c| c.target_id == current_user.id ? c.creator : c.target }
-                .sort_by(&:title_name)
+    current_user.contacts.order('LOWER(name)')
   end
 
   def load_chat
@@ -67,6 +79,14 @@ class ChatsController < ApplicationController
     not_found unless ChatMember.exists?(user_id: current_user.id, chat_id: params[:id])
   end
 
+  def owner?
+    not_found unless @chat.owner_id == current_user.id
+  end
+
+  def admin_or_owner?
+    not_found unless @chat.owner_id == current_user.id || @chat.administrators.include?(current_user)
+  end
+
   def handle_selection
     @selected = @chat&.id
 
@@ -80,5 +100,15 @@ class ChatsController < ApplicationController
 
     @rounded_top    = ids[index + 1]
     @rounded_bottom = ids[index - 1] if index - 1 >= 0
+  end
+
+  def group_up_message(groups, msg)
+    if groups == [] || groups[-1][-1].user_id != msg.user_id
+      groups += [[msg]]
+    else
+      groups[-1] += [msg]
+    end
+
+    groups
   end
 end

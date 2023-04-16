@@ -6,22 +6,20 @@ class ContactsController < ApplicationController
   before_action :check_contact_exists, only: %i[update destroy]
 
   def index
-    @contacts = current_user.contacts.includes(:creator, :target)
-                            .map { |c| [c.id, c.target_id == current_user.id ? c.creator : c.target] }
-                            .sort_by { |_, c| c.title_name }
+    @contacts = current_user.contacts.order('LOWER(name)')
   end
 
   def new
     @new_contact       = Contact.new
-    @incoming_requests = current_user.incoming_contact_requests.includes(:creator).map { |c| [c.id, c.creator] }
-    @outgoing_requests = current_user.outgoing_contact_requests.includes(:target).map  { |c| [c.id, c.target]  }
+    @incoming_requests = current_user.incoming_contact_requests.order('LOWER(name)')
+    @outgoing_requests = current_user.outgoing_contact_requests.order('LOWER(name)')
   end
 
   def create
     target = User.find_by(contact_number:)
 
     if !target.nil? && target.id != current_user.id
-      Contact.create(creator_id: current_user.id, target_id: target.id, status: 'pending')
+      Contact.create(creator_id: current_user.id, target_id: target.id, status: :pending)
       flash[:notice] = 'Contact request sent successfully'
     else
       flash[:alert] = 'Couldn\'t find a user with that contact number'
@@ -32,7 +30,7 @@ class ContactsController < ApplicationController
 
   # Contact request accepted
   def update
-    @contact.update(status: 'accepted')
+    @contact.update(status: :accepted)
     flash[:notice] = 'Contact request accepted'
     redirect_to :pending_contacts
   end
@@ -55,6 +53,6 @@ class ContactsController < ApplicationController
   end
 
   def check_contact_exists
-    @contact = Contact.find_by(id: params[:id]) || not_found
+    @contact = current_user.find_contact(params[:id]) || not_found
   end
 end

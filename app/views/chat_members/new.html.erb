@@ -1,0 +1,20 @@
+<div id="members-list">
+  <h3>Add Members</h3>
+
+  <%= link_to '+ Add new contacts', pending_contacts_path, data: { turbo_frame: '_top' } %>
+
+  <% @contacts.each do |contact| %>
+    <div class="member">
+      <div>
+        <%= render 'shared/icon', resource: contact, size: :small %>
+
+        <span><%= contact.title_name %></span>
+      </div>
+      <div>
+        <%= link_to chat_chat_members_path(@chat, user_id: contact.id), data: { turbo_method: :post } do %>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288M400 256H112"/></svg>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
