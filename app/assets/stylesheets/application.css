@@ -278,3 +278,13 @@ header {
     align-items: center;
     gap: 10px;
 }
+
+.link-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.link-with-icon svg {
+    height: 20px;
+}

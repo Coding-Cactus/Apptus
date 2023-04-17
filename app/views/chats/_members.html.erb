@@ -2,7 +2,10 @@
   <h3>Members</h3>
 
   <% if chat.owner_id == current_user.id || chat.administrator_ids.include?(current_user.id) %>
-    <%= link_to '+ Add a new members', new_chat_chat_member_path(@chat), id: 'new-member' %>
+    <%= link_to new_chat_chat_member_path(@chat), id: 'new-member', class: 'link-with-icon' do %>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288M400 256H112"/></svg>
+      <span>Add new members</span>
+    <% end %>
   <% end %>
 
   <% members.each do |member| %>

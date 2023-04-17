@@ -51,6 +51,14 @@ class Chat < ApplicationRecord
     user_ids.each { |id| add_user(id, members, contacts) }
   end
 
+  def add_new_member(current_user, member_id)
+    if chat_members.exists?(user_id: member_id) || !current_user.contacts.select(:id).map(&:id).include?(member_id)
+      return false
+    end
+
+    chat_members.create(user_id: member_id, role: :basic)
+  end
+
   def administrators
     User.joins(:chat_members).where(chat_members: { chat_id: id, role: :administrator })
   end
