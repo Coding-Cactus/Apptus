@@ -16,14 +16,30 @@
         <span><%= member.user.title_name %></span>
       </div>
 
-      <% if current_user.id != member.user_id && (
-          chat.owner_id == current_user.id || (
-              chat.administrator_ids.include?(current_user.id) &&
-                !chat.administrator_ids.include?(member.user_id) &&
-                member.user_id != chat.owner_id
-            )
-        ) %>
-        <div>
+      <div>
+        <% if current_user.id == chat.owner_id && current_user.id != member.user_id %>
+          <%= form_with model: [chat, member], data: { controller: 'role-select' } do |form| %>
+            <%= render 'shared/dropdown_select',
+                       form: form,
+                       field: 'role',
+                       options: ChatMember.roles.map{ |display, id| [id, display, display] },
+                       default_id: member.role_id,
+                       default_index: member.role_id,
+                       default_display: member.role,
+                       on_change: 'role-select#update' %>
+          <% end %>
+        <% else %>
+          <span><%= chat.owner_id == member.user_id ? 'Owner' : member.role.titlecase %></span>
+        <% end %>
+
+        <% if current_user.id != member.user_id && (
+            chat.owner_id == current_user.id || (
+                chat.administrator_ids.include?(current_user.id) &&
+                  !chat.administrator_ids.include?(member.user_id) &&
+                  member.user_id != chat.owner_id
+              )
+          ) %>
+
           <%= link_to chat_chat_member_path(chat, member),
                       data: {
                         turbo_method: 'delete',
@@ -32,8 +48,8 @@
                       class: 'remove' do %>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
           <% end %>
-        </div>
       <% end %>
+      </div>
     </div>
   <% end %>
 </div>

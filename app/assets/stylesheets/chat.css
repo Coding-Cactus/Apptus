@@ -367,4 +367,5 @@
 
 #members-list .member .remove {
     color: #DD3030;
+    display: flex;
 }

@@ -7,8 +7,9 @@ class ChatMembersController < ApplicationController
   before_action :populate_chat
   before_action :populate_chat_member, except: %i[new create]
   before_action :populate_contacts, only: :new
+  before_action :owner?, only: :update
   before_action :admin_or_owner?, only: %i[new create]
-  before_action :higher_permissions?, only: %i[update destroy]
+  before_action :higher_permissions?, only: %i[destroy]
 
   def new; end
 
@@ -27,7 +28,15 @@ class ChatMembersController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    if @member.update(update_params)
+      flash[:notice] = 'Role updated for chat member'
+    else
+      flash[:alert] = 'Something went wrong while updating that member\'s role'
+    end
+
+    redirect_to edit_chat_path(@chat)
+  end
 
   def destroy
     if @chat.chat_members.count > 2
@@ -41,6 +50,10 @@ class ChatMembersController < ApplicationController
   end
 
   private
+
+  def update_params
+    params.require(:chat_member).permit(:role)
+  end
 
   def load_chats
     @chats = current_user.chats.includes(:last_message).order('messages.created_at' => :desc)
@@ -56,6 +69,10 @@ class ChatMembersController < ApplicationController
 
   def populate_contacts
     @contacts = current_user.contacts.where.not(id: @chat.users).order('LOWER(users.name)')
+  end
+
+  def owner?
+    not_found unless @chat.owner_id == current_user.id
   end
 
   def admin_or_owner?
