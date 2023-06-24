@@ -25,6 +25,9 @@ export default class extends Controller {
         }
 
         const list = document.querySelector("#list")
+
+        // Set attribute so that open-chat#disconnect knows this chat isn;t actually being deleted, just moved
+        chat.setAttribute("data-being-sorted", "")
         list.insertBefore(chat, below)
 
         const selected = list.querySelector(".selected")

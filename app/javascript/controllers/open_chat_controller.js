@@ -13,15 +13,20 @@ export default class extends Controller {
 
     // Triggered by being removed from a chat, and #broadcast_remove_to removing the chat from sidebar
     disconnect() {
-        console.log(this.chatTarget)
+        // Only run this when the chat has actually been removed, not just when it's been moved around
+        if (!this.chatTarget.hasAttribute("data-being-sorted")) {
+            document.querySelector(".rounded-top")?.classList.remove("rounded-top")
+            document.querySelector(".rounded-bottom")?.classList.remove("rounded-bottom")
 
-        document.querySelector(".rounded-top")?.classList.remove("rounded-top")
-        document.querySelector(".rounded-bottom")?.classList.remove("rounded-bottom")
+            console.log(this.chatTarget)
 
-        if (this.chatTarget.classList.contains("selected")) {
-            document.querySelector("#chat").src = window.location.origin
-        } else if (!!document.querySelector(".chat-preview.selected")) {
-            this.selectInSidebar(document.querySelector(".chat-preview.selected")) // Update rounded corners
+            if (this.chatTarget.classList.contains("selected")) {
+                document.querySelector("#chat").src = window.location.origin
+            } else if (!!document.querySelector(".chat-preview.selected")) {
+                this.selectInSidebar(document.querySelector(".chat-preview.selected")) // Update rounded corners
+            }
+        } else {
+            this.chatTarget.removeAttribute("data-being-sorted")
         }
     }
 
