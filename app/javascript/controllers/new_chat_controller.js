@@ -7,6 +7,13 @@ export default class extends Controller {
             this.element.getAttribute("data-controller").replace(/ ?new-chat/, "")
         )
 
-        this.application.getControllerForElementAndIdentifier(this.element, "open-chat").open()
+        const selected = document.querySelector(".chat-preview.selected")
+
+        if (this.element.getAttribute("data-force-open") !== null) {
+            this.application.getControllerForElementAndIdentifier(this.element, "open-chat").open()
+            this.element.removeAttribute("data-force-open")
+        } else if (selected !== null) {
+            this.application.getControllerForElementAndIdentifier(selected, "open-chat").open()
+        }
     }
 }
