@@ -11,17 +11,6 @@ class Chat < ApplicationRecord
   validates :colour, allow_blank: true, format: /#[A-F0-9]{6}/
   validates :users, length: { minimum: 2, message: 'must be more than just yourself' }
 
-  after_create_commit do
-    users.each do |user|
-      broadcast_prepend_later_to(
-        "user_#{user.id}_chats",
-        target: 'list',
-        partial: 'chats/chat_preview',
-        locals: { from_stream: true, new_chat: true }
-      )
-    end
-  end
-
   after_update_commit do
     users.each do |user|
       broadcast_replace_later_to(
@@ -29,15 +18,6 @@ class Chat < ApplicationRecord
         target: "chat_#{id}",
         partial: 'chats/chat',
         locals: { from_stream: true }
-      )
-    end
-  end
-
-  before_destroy prepend: true do
-    users.each do |user|
-      broadcast_remove_to(
-        "user_#{user.id}_chats",
-        target: "chat_#{id}_wrapper"
       )
     end
   end
