@@ -18,8 +18,6 @@ export default class extends Controller {
             document.querySelector(".rounded-top")?.classList.remove("rounded-top")
             document.querySelector(".rounded-bottom")?.classList.remove("rounded-bottom")
 
-            console.log(this.chatTarget)
-
             if (this.chatTarget.classList.contains("selected")) {
                 document.querySelector("#chat").src = window.location.origin
             } else if (!!document.querySelector(".chat-preview.selected")) {
