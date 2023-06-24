@@ -12,7 +12,9 @@ class ChatMember < ApplicationRecord
   end
 
   before_destroy do
-    chat.messages.create(user_id: User.find_by(role: :system).id, content: "#{user.title_name} was removed")
+    unless destroyed_by_association
+      chat.messages.create(user_id: User.find_by(role: :system).id, content: "#{user.title_name} was removed")
+    end
   end
 
   def role_id

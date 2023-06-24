@@ -1,11 +1,11 @@
 class Chat < ApplicationRecord
-  has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
-
   has_one :owner, class_name: 'User'
 
-  has_many :messages, dependent: :destroy
   has_many :chat_members, dependent: :destroy
   has_many :users, through: :chat_members
+
+  has_many :messages, dependent: :destroy
+  has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
 
   validates :name, presence: true, length: { in: 1..30 }
   validates :colour, allow_blank: true, format: /#[A-F0-9]{6}/
@@ -29,6 +29,15 @@ class Chat < ApplicationRecord
         target: "chat_#{id}",
         partial: 'chats/chat',
         locals: { from_stream: true }
+      )
+    end
+  end
+
+  before_destroy prepend: true do
+    users.each do |user|
+      broadcast_remove_to(
+        "user_#{user.id}_chats",
+        target: "chat_#{id}_wrapper"
       )
     end
   end
