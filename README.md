@@ -30,7 +30,9 @@ Hosted on Railway, runs on Ruby `3.2.1`, Rails 7, Supabase for Postgres database
 git clone 'https://github.com/Coding-Cactus/Apptus.git'
 cd Apptus
 bundle install
-# Set dev ENV vars
+
+# Set dev ENV vars now, before next commends
+
 rails db:setup
 rails s
 ```
