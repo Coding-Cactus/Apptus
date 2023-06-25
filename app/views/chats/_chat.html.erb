@@ -1,4 +1,4 @@
-<div id="<%= dom_id(chat) %>" <%= 'data-controller="sort-chats"'.html_safe if from_stream %>>
+<div id="<%= dom_id(chat) %>" data-open-chat-target="content" <%= 'data-controller="sort-chats"'.html_safe if from_stream %>>
   <%= render 'shared/icon', resource: chat, size: :big %>
 
   <div class="chat-preview-details">

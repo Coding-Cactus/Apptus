@@ -4,7 +4,7 @@ class ChatsController < ApplicationController
   layout 'chat'
 
   before_action :authenticate_user!
-  before_action :load_chat, only: %i[show edit update]
+  before_action :load_chat, only: %i[show edit update destroy]
   before_action :load_chats, except: :destroy
   before_action :can_view_chat?, only: %i[show edit update destroy]
   before_action :owner?, only: :destroy
@@ -55,7 +55,12 @@ class ChatsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @chat.destroy
+
+    flash[:notice] = 'Chat successfully deleted'
+    redirect_to root_path
+  end
 
   private
 

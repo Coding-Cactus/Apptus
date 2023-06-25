@@ -169,9 +169,9 @@ header {
 }
 
 .notice {
-    background-color: #55815199;
-    border-top: 2px solid #558151;
-    border-bottom: 2px solid #558151;
+    background-color: #446c4199;
+    border-top: 2px solid #446c41;
+    border-bottom: 2px solid #446c41;
 }
 
 .alert {
@@ -277,4 +277,76 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.link-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.link-with-icon svg {
+    height: 20px;
+}
+
+.dropdown-select {
+    position: relative;
+    --width: 160px;
+}
+
+.dropdown-select div {
+    background-color: var(--input-bg);
+    color: #3F463E;
+    font-size: 19px;
+    padding: 7px;
+    width: var(--width);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-radius 0s linear 0.3s;
+}
+
+.dropdown-select div > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-select.open div {
+    border-radius: 5px 5px 0 0;
+    transition: border-radius 0s;
+}
+
+.dropdown-select ul {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    height: 0;
+    list-style: none;
+    font-size: 19px;
+    width: var(--width);
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+    transition: height 0.3s;
+}
+
+.dropdown-select svg {
+    height: 20px;
+    transition: transform 0.3s;
+}
+
+.dropdown-select.open svg {
+    transform: rotate(180deg);
+}
+
+.dropdown-select li {
+    color: #3F463E;
+    background-color: #b0bd9a;
+    width: 100%;
+    padding: 5px;
+    transition: background-color 0.2s;
+}
+
+.dropdown-select li:hover {
+    cursor: pointer;
+    background-color: #bac5a8;
 }

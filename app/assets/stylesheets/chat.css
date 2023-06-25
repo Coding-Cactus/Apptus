@@ -367,4 +367,13 @@
 
 #members-list .member .remove {
     color: #DD3030;
+    display: flex;
+}
+
+#delete-chat {
+    color: #DD3030;
+}
+
+.removed-chat {
+    display: none;
 }

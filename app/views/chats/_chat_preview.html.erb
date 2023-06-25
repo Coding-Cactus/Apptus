@@ -7,7 +7,10 @@
                             else
                               ''
                             end %>"
-     data-controller="open-chat<%= ' new-chat' if new_chat %>" data-open-chat-target="chat">
+     data-controller="open-chat<%= ' new-chat' if new_chat %>"
+     data-open-chat-target="chat"
+     <%= 'data-force-open' if redirected_to %>
+     id="<%= dom_id(chat) %>_wrapper">
   <%= link_to '', chat,
               data: { turbo_frame: 'chat', action: 'click->open-chat#open' },
               class: 'link-blanket' %>

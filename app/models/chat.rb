@@ -1,26 +1,15 @@
 class Chat < ApplicationRecord
-  has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
-
   has_one :owner, class_name: 'User'
 
-  has_many :messages, dependent: :destroy
   has_many :chat_members, dependent: :destroy
   has_many :users, through: :chat_members
+
+  has_many :messages, dependent: :destroy
+  has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
 
   validates :name, presence: true, length: { in: 1..30 }
   validates :colour, allow_blank: true, format: /#[A-F0-9]{6}/
   validates :users, length: { minimum: 2, message: 'must be more than just yourself' }
-
-  after_create_commit do
-    users.each do |user|
-      broadcast_prepend_later_to(
-        "user_#{user.id}_chats",
-        target: 'list',
-        partial: 'chats/chat_preview',
-        locals: { from_stream: true, new_chat: true }
-      )
-    end
-  end
 
   after_update_commit do
     users.each do |user|
@@ -49,6 +38,14 @@ class Chat < ApplicationRecord
 
     users << current_user
     user_ids.each { |id| add_user(id, members, contacts) }
+  end
+
+  def add_new_member(current_user, member_id)
+    if chat_members.exists?(user_id: member_id) || !current_user.contacts.select(:id).map(&:id).include?(member_id)
+      return false
+    end
+
+    chat_members.create(user_id: member_id, role: :basic)
   end
 
   def administrators

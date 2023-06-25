@@ -1,7 +1,15 @@
 <div id="members-list">
+  <%= link_to edit_chat_path(@chat), class: 'link-with-icon' do %>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg>
+    <span>Back</span>
+  <% end %>
+
   <h3>Add Members</h3>
 
-  <%= link_to '+ Add new contacts', pending_contacts_path, data: { turbo_frame: '_top' } %>
+  <%= link_to pending_contacts_path, class: 'link-with-icon', data: { turbo_frame: '_top' } do %>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288M400 256H112"/></svg>
+    <span>Add new contacts</span>
+  <% end %>
 
   <% @contacts.each do |contact| %>
     <div class="member">

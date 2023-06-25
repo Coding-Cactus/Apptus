@@ -1,0 +1,24 @@
+<div class="dropdown-select" data-controller="dropdown-select" data-dropdown-select-target="dropdown">
+  <%= form.hidden_field field, value: default_id,
+                        data: {
+                          dropdown_select_target: 'hidden',
+                          action: "change->#{on_change || ''}"
+                        } %>
+
+  <div data-action="click->dropdown-select#toggleOpen">
+    <span>
+      <span data-dropdown-select-target="selected" data-option-index="<%= default_index %>" data-option-id="<%= default_id %>"><%= default_display.titlecase %></span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
+    </span>
+  </div>
+
+  <ul>
+    <% options.each do |index, id, display| %>
+      <% unless id == default_id %>
+        <li data-action="click->dropdown-select#selectOption" data-option-index="<%= index %>" data-option-id="<%= id %>">
+          <%= display.titlecase %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

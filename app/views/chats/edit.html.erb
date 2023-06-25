@@ -1,4 +1,5 @@
 <div>
+  <% if @chat.owner_id == current_user.id || @chat.administrators.include?(current_user) %>
     <%= form_with model: @chat, id: 'edit-chat-name' do |form| %>
       <%= form.label :name %>
 
@@ -16,6 +17,20 @@
         </ul>
       </div>
     <% end %>
+  <% end %>
 
-    <%= render 'members', chat: @chat, members: @members %>
+  <%= render 'members', chat: @chat, members: @members %>
+
+  <% if @chat.owner_id == current_user.id %>
+    <%= link_to chat_path(@chat),
+                data: {
+                  turbo_method: :delete,
+                  turbo_confirm: 'Are you sure you want to permanently delete this chat and all of it\'s messages?'
+                },
+                id: 'delete-chat',
+                class: 'link-with-icon' do %>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+      <span>Delete Chat</span>
+      <% end %>
+  <% end %>
 </div>
