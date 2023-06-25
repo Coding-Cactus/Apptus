@@ -49,12 +49,14 @@
 
   <body>
     <div id="app-page">
-      <%= render 'chats/sidebar',
-                 selected: @selected,
-                 header_rounded: @header_rounded,
-                 footer_rounded: @footer_rounded,
-                 rounded_top: @rounded_top,
-                 rounded_bottom: @rounded_bottom %>
+      <% unless turbo_frame_request? %>
+        <%= render 'chats/sidebar',
+                   selected: @selected,
+                   header_rounded: @header_rounded,
+                   footer_rounded: @footer_rounded,
+                   rounded_top: @rounded_top,
+                   rounded_bottom: @rounded_bottom %>
+      <% end %>
 
       <%= turbo_frame_tag 'chat', class: 'page-content' do %>
         <header>
