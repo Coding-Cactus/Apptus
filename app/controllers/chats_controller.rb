@@ -58,6 +58,7 @@ class ChatsController < ApplicationController
   def destroy
     @chat.destroy
 
+    flash[:notice] = 'Chat successfully deleted'
     redirect_to root_path
   end
 
