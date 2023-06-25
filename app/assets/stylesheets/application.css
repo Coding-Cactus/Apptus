@@ -350,3 +350,39 @@ header {
     cursor: pointer;
     background-color: #bac5a8;
 }
+
+scrollbar {
+  width: 16px;
+}
+
+scrollbar-track {
+  background: transparent;
+}
+
+scrollbar-thumb {
+  background-color: var(--main-bg);
+  border: 4px var(--foreground) solid;
+  border-radius: 8px;
+}
+
+scrollbar-thumb:hover {
+  background-color: var(--secondary-bg);
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-bg);
+  border: 4px var(--foreground) solid;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary-bg);
+}
