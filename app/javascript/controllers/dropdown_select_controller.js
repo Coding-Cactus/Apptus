@@ -3,6 +3,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = ["dropdown", "selected", "hidden"]
 
+    connect() {
+        const dropdowns = Array.from(document.querySelectorAll(".dropdown-select"))
+        this.element.style.zIndex = dropdowns.length - dropdowns.indexOf(this.element)
+    }
+
     toggleOpen() {
         this.dropdownTarget.classList.toggle("open")
 
