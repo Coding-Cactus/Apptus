@@ -3,7 +3,7 @@ class ChatMembersController < ApplicationController
 
   before_action :authenticate_user!
 
-  before_action :load_chats, only: :new
+  before_action :load_chats, only: :new, unless: :turbo_frame_request?
   before_action :populate_chat
   before_action :populate_chat_member, except: %i[new create]
   before_action :populate_contacts, only: :new

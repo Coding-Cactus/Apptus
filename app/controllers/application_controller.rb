@@ -19,4 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def not_found = raise ActionController::RoutingError, 'Not found'
+
+  def turbo_frame_request? = !request.headers['Turbo-Frame'].nil?
+  helper_method :turbo_frame_request?
 end

@@ -5,11 +5,11 @@ class ChatsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :load_chat, only: %i[show edit update destroy]
-  before_action :load_chats, except: :destroy
+  before_action :load_chats, except: :destroy, unless: :turbo_frame_request?
   before_action :can_view_chat?, only: %i[show edit update destroy]
   before_action :owner?, only: :destroy
   before_action :admin_or_owner?, only: :update
-  before_action :handle_selection, except: :destroy
+  before_action :handle_selection, except: :destroy, unless: :turbo_frame_request?
 
   def index; end
 
