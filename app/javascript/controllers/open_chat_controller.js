@@ -13,8 +13,10 @@ export default class extends Controller {
 
     // Triggered by being removed from a chat, and #broadcast_remove_to removing the chat from sidebar
     disconnect() {
-        // Only run this when the chat has actually been removed, not just when it's been moved around
-        if (!this.chatTarget.hasAttribute("data-being-sorted")) {
+        // Only run this when the chat has actually been removed, not just when it's been moved around,
+        // or going to a non-chat page
+        if (!(this.chatTarget.hasAttribute("data-being-sorted") || document.querySelector("#chats-list") === null)) {
+            console.log("...")
             document.querySelector(".rounded-top")?.classList.remove("rounded-top")
             document.querySelector(".rounded-bottom")?.classList.remove("rounded-bottom")
 
