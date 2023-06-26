@@ -82,6 +82,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    appsignal (3.4.4)
+      rack
     ast (2.4.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
@@ -253,6 +255,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_union
+  appsignal
   bootsnap
   capybara
   debug
