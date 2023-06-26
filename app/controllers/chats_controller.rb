@@ -40,7 +40,7 @@ class ChatsController < ApplicationController
   end
 
   def edit
-    @members = @chat.chat_members.includes(:user)
+    @members = @chat.chat_members.includes(:user).order('LOWER(users.name)').references(:users)
   end
 
   def update
@@ -98,8 +98,8 @@ class ChatsController < ApplicationController
     ids = @chats.map(&:id)
     index = ids.index(@selected)
 
-    @footer_rounded = ids.last == @selected
-    @header_rounded = ids.first == @selected
+    @footer_rounded = ids.last == @selected && ids.length > 0
+    @header_rounded = ids.first == @selected && ids.length > 0
 
     return if index.nil?
 
