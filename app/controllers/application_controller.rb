@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # '/ping' for uptime monitoring
+  def ping; end
+
   protected
 
   def configure_permitted_parameters
