@@ -98,8 +98,8 @@ class ChatsController < ApplicationController
     ids = @chats.map(&:id)
     index = ids.index(@selected)
 
-    @footer_rounded = ids.last == @selected
-    @header_rounded = ids.first == @selected
+    @footer_rounded = ids.last == @selected && ids.length > 0
+    @header_rounded = ids.first == @selected && ids.length > 0
 
     return if index.nil?
 
