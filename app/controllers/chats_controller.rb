@@ -40,7 +40,7 @@ class ChatsController < ApplicationController
   end
 
   def edit
-    @members = @chat.chat_members.includes(:user)
+    @members = @chat.chat_members.includes(:user).order('LOWER(users.name)').references(:users)
   end
 
   def update
