@@ -10,7 +10,6 @@ Hosted on [Railway](https://railway.app/), runs on Ruby `3.2.1`, Rails 7, [Supab
 | PGPASSWORD             | Password of respective user           |
 | APPTUS_EMAIL_HOST      | apptus.online                         |
 | APPSIGNAL_PUSH_API_KEY | Secret AppSignal key                  |
-| APP_REVISION           | Version of Apptus (major.minor.patch) |
 
 ### Production Environment Variables
 | Name                     | Value/Description                     |
@@ -25,7 +24,6 @@ Hosted on [Railway](https://railway.app/), runs on Ruby `3.2.1`, Rails 7, [Supab
 | APPTUS_EMAIL_HOST        | apptus.online                         |
 | REDIS_URL                | ${{Redis.REDIS_URL}} (Railway thing)  |
 | APPSIGNAL_PUSH_API_KEY   | Secret AppSignal key                  |
-| APP_REVISION             | Version of Apptus (major.minor.patch) |
 
 ### Running locally
 

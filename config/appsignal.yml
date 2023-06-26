@@ -5,6 +5,9 @@ default: &defaults
   # Your app's name
   name: "Apptus"
 
+  # Apptus version
+  revision: '0.1.0'
+
   # Actions that should not be monitored by AppSignal
   # ignore_actions:
   #   - ApplicationController#isup
