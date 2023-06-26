@@ -43,4 +43,6 @@ Rails.application.routes.draw do
 
   resources :contacts, only: %i[index create update destroy]
   get 'contacts/pending', to: 'contacts#new', as: :pending_contacts
+
+  get '/ping', to: 'application#ping'
 end

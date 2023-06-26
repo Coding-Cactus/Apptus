@@ -9,8 +9,8 @@ default: &defaults
   revision: '0.1.0'
 
   # Actions that should not be monitored by AppSignal
-  # ignore_actions:
-  #   - ApplicationController#isup
+  ignore_actions:
+    - ApplicationController#ping
 
   # Errors that should not be recorded by AppSignal
   # For more information see our docs:
