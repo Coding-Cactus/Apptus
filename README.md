@@ -1,7 +1,7 @@
 # Apptus
 https://apptus.online
 
-Hosted on Railway, runs on Ruby `3.2.1`, Rails 7, Supabase for Postgres database, MailerSend for emails, Mailcatcher for development.
+Hosted on [Railway](https://railway.app/), runs on Ruby `3.2.1`, Rails 7, [Supabase](https://app.supabase.com/) for Postgres database, [MailerSend](https://app.mailersend.com/) for emails, [Mailcatcher](https://mailcatcher.me/) for development. Application performance monitoring sponsored by [AppSignal](https://www.appsignal.com/).
 
 ### Development Environment Variables
 | Name              | Value/Description                    |
