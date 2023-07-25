@@ -1,5 +1,5 @@
 class Chat < ApplicationRecord
-  has_one :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'User'
 
   has_many :chat_members, dependent: :destroy
   has_many :users, through: :chat_members
