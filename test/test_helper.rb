@@ -10,4 +10,6 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  include ActionMailer::TestHelper
+  include Rails.application.routes.url_helpers
 end
