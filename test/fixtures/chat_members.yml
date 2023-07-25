@@ -1,9 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  chat: one
+RomanChat1:
+  user: Roman
+  chat: Chat1
+  role: basic
 
-two:
-  user: two
-  chat: two
+StantonChat1:
+  user: Stanton
+  chat: Chat1
+  role: basic
+
+CorrieChat1:
+  user: Corrie
+  chat: Chat1
+  role: basic
+
+RomanChat2:
+  user: Roman
+  chat: Chat2
+  role: basic
+
+StantonChat2:
+  user: Stanton
+  chat: Chat2
+  role: basic
+
+CorrieChat2:
+  user: Corrie
+  chat: Chat2
+  role: basic
