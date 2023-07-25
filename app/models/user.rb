@@ -27,7 +27,7 @@ class User < ApplicationRecord
       Array.new(12) { ('0'..'9').to_a.sample }.join while contact_number.nil? || User.exists?(contact_number:)
   end
 
-  def title_name = name.titlecase
+  def title_name = name.downcase.titlecase
   def first_name = name.split.first.titlecase
   def initials   = name.split.first(2).map(&:chr).join.upcase
   def nice_contact_number = contact_number.chars.each_slice(4).map(&:join).join('-')
