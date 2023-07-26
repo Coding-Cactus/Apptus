@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_13_143310) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_142935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_143310) do
   create_table "contacts", force: :cascade do |t|
     t.integer "creator_id"
     t.integer "target_id"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_contacts_on_creator_id", using: :hash
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_143310) do
   create_table "statuses", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "message_id", null: false
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_statuses_on_message_id"
