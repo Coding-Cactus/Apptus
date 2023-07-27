@@ -20,13 +20,12 @@ jobs:
           - "5432:5432"
         env:
           POSTGRES_DB: Apptus_test
-          PGUSER: rails
-          PGPASSWORD: password
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
       APPTUS_EMAIL_HOST: apptus.online
-      PGUSER: rails
-      PGPASSWORD: password
+      DATABASE_URL: postgres://rails:password@localhost:5432/Apptus_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

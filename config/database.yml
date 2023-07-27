@@ -16,6 +16,7 @@ development:
 test:
   <<: *default
   host: localhost
+  url: <%= ENV['DATABASE_URL'] %>
   database: Apptus_test
 
 production:
