@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 class Chat < ApplicationRecord
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: "User"
 
   has_many :chat_members, dependent: :destroy
   has_many :users, through: :chat_members
 
   has_many :messages, dependent: :destroy
-  has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
+  has_one :last_message, -> { order(created_at: :desc) }, class_name: "Message"
 
   validates :name, presence: true, length: { in: 1..30 }
   validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
-  validates :users, length: { minimum: 2, message: 'must be more than just yourself' }
+  validates :users, length: { minimum: 2, message: "must be more than just yourself" }
 
   after_update_commit do
     users.each do |user|
       broadcast_replace_later_to(
         "user_#{user.id}_chats",
         target: "chat_#{id}",
-        partial: 'chats/chat',
+        partial: "chats/chat",
         locals: { from_stream: true }
       )
     end
@@ -27,7 +29,7 @@ class Chat < ApplicationRecord
   end
 
   after_create do
-    messages.create(user_id: User.find_by(role: :system).id, content: 'Chat created')
+    messages.create(user_id: User.find_by(role: :system).id, content: "Chat created")
   end
 
   def initials = name.split.first(2).map { |w| w[0] }.join.upcase
@@ -57,11 +59,10 @@ class Chat < ApplicationRecord
   end
 
   private
+    def add_user(id, members, contacts)
+      return if members.include?(id) || !contacts.include?(id)
 
-  def add_user(id, members, contacts)
-    return if members.include?(id) || !contacts.include?(id)
-
-    user = User.find(id)
-    users << user unless user.nil?
-  end
+      user = User.find(id)
+      users << user unless user.nil?
+    end
 end

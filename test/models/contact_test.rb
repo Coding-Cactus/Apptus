@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class ContactTest < ActiveSupport::TestCase
-  test 'valid contact' do
+  test "valid contact" do
     stevie = users(:Stevie)
     roman = users(:Roman)
 
@@ -21,19 +23,19 @@ class ContactTest < ActiveSupport::TestCase
     assert roman.contacts.include?(stevie)
   end
 
-  test 'should not allow contact with no target' do
+  test "should not allow contact with no target" do
     contact = Contact.new(creator: users(:Stevie))
 
-    refute contact.valid?
+    assert_not contact.valid?
   end
 
-  test 'should not allow contact with no creator' do
+  test "should not allow contact with no creator" do
     contact = Contact.new(target: users(:Stevie))
 
-    refute contact.valid?
+    assert_not contact.valid?
   end
 
-  test 'should not allow contact with invalid status' do
+  test "should not allow contact with invalid status" do
     assert_raise(ArgumentError) { Contact.new(creator: users(:Earlie), target: users(:Corrie), status: :abcdefg) }
   end
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class AddRolesToUsers < ActiveRecord::Migration[7.0]
   def up
     add_column :users, :role, :integer, default: 0
 
     User.all.each { |u| u.update(role: :basic) }
 
-    User.create(name: 'Apptus System', role: :system)
+    User.create(name: "Apptus System", role: :system)
   end
 
   def down
