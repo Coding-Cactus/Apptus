@@ -1,0 +1,29 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "dd2b4d2a90ab83b56d222a8f4d3dc8523136c667cd56d491258ce92ba7853c55",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/chat_members_controller.rb",
+      "line": 55,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:chat_member).permit(:role)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ChatMembersController",
+        "method": "update_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": "Not an issue as #owner? is called before the action"
+    }
+  ],
+  "updated": "2023-07-27 20:17:09 +0100",
+  "brakeman_version": "6.0.1"
+}

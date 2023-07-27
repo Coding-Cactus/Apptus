@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -57,7 +59,7 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store, {
-    url: ENV['REDIS_URL'],
+    url: ENV["REDIS_URL"],
     read_timeout:       0.4,
     write_timeout:      0.4,
     reconnect_attempts: 1
@@ -65,16 +67,16 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "CacApp_production"
+  # config.active_job.queue_name_prefix = "Apptus_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV['APPTUS_HOST'] }
+  config.action_mailer.default_url_options = { host: ENV["APPTUS_HOST"] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    port: '587',
-    address: 'smtp.mailersend.net',
-    user_name: ENV['EMAIL_USERNAME'],
-    password:  ENV['EMAIL_PASSWORD']
+    port: "587",
+    address: "smtp.mailersend.net",
+    user_name: ENV["EMAIL_USERNAME"],
+    password:  ENV["EMAIL_PASSWORD"]
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

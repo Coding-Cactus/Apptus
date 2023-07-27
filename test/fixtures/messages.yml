@@ -1,11 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  chat: one
-  user: one
-  content: MyText
+StantonChat1Message1:
+  chat: Chat1
+  user: Stanton
+  content: Hi, testing 123
 
-two:
-  chat: two
-  user: two
-  content: MyText
+StantonChat1Message2:
+  chat: Chat1
+  user: Stanton
+  content: Hellooo!
+
+StantonChat2Message1:
+  chat: Chat2
+  user: Stanton
+  content: Hey there

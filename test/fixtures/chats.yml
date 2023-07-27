@@ -1,11 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  colour: MyString
-  pfp: MyString
+Chat1:
+  owner: Roman
+  name: Test Chat 1
+  colour: '#D69637'
 
-two:
-  name: MyString
-  colour: MyString
-  pfp: MyString
+Chat2:
+  owner: Earlie
+  name: Test Chat 2
+  colour: '#EF3E3E'
+
+Chat3:
+  owner: Ema
+  name: Test Chat 3
+  colour: '#6046FC'

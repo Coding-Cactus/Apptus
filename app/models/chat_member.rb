@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatMember < ApplicationRecord
   belongs_to :user
   belongs_to :chat
@@ -12,9 +14,9 @@ class ChatMember < ApplicationRecord
 
     broadcast_prepend_later_to(
       "user_#{user_id}_chats",
-      target: 'list',
-      partial: 'chats/chat_preview',
-      locals: { chat: chat, new_chat: true, redirected_to: chat.owner_id == user_id }
+      target: "list",
+      partial: "chats/chat_preview",
+      locals: { chat:, new_chat: true, redirected_to: chat.owner_id == user_id }
     )
   end
 

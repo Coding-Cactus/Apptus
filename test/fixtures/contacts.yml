@@ -1,11 +1,61 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  creator_id: 1
-  target_id: 1
-  status: MyString
+Stanton->Stevie:
+  creator: Stanton
+  target: Stevie
+  status: pending
 
-two:
-  creator_id: 1
-  target_id: 1
-  status: MyString
+Corrie->Stanton:
+    creator: Corrie
+    target: Stanton
+    status: pending
+
+Earlie->Stanton:
+  creator: Earlie
+  target: Stanton
+  status: pending
+
+Stanton<->Roman:
+    creator: Stanton
+    target: Roman
+    status: accepted
+
+Roman<->Corrie:
+    creator: Roman
+    target: Corrie
+    status: accepted
+
+Corrie->Roman:
+    creator: Corrie
+    target: Roman
+    status: pending
+
+Walker<->Buddy:
+    creator: Walker
+    target: Buddy
+    status: accepted
+
+Walker<->Ema:
+    creator: Walker
+    target: Ema
+    status: accepted
+
+Walker<->Kasey:
+    creator: Walker
+    target: Kasey
+    status: accepted
+
+Buddy<->Ema:
+    creator: Buddy
+    target: Ema
+    status: accepted
+
+Buddy<->Kasey:
+    creator: Buddy
+    target: Kasey
+    status: accepted
+
+Ema<->Kasey:
+    creator: Ema
+    target: Kasey
+    status: accepted

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddContactNumberToUser < ActiveRecord::Migration[7.0]
   def down
     remove_index :users,  :contact_number
@@ -10,7 +12,7 @@ class AddContactNumberToUser < ActiveRecord::Migration[7.0]
 
     numbers = []
     User.all.each do |user|
-      number = Array.new(12) { ('0'..'9').to_a.sample }.join while number.nil? || numbers.include?(number)
+      number = Array.new(12) { ("0".."9").to_a.sample }.join while number.nil? || numbers.include?(number)
 
       numbers << number
       user.update(contact_number: number)
