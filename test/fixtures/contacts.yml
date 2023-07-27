@@ -29,3 +29,33 @@ Corrie->Roman:
     creator: Corrie
     target: Roman
     status: pending
+
+Walker<->Buddy:
+    creator: Walker
+    target: Buddy
+    status: accepted
+
+Walker<->Ema:
+    creator: Walker
+    target: Ema
+    status: accepted
+
+Walker<->Kasey:
+    creator: Walker
+    target: Kasey
+    status: accepted
+
+Buddy<->Ema:
+    creator: Buddy
+    target: Ema
+    status: accepted
+
+Buddy<->Kasey:
+    creator: Buddy
+    target: Kasey
+    status: accepted
+
+Ema<->Kasey:
+    creator: Ema
+    target: Kasey
+    status: accepted

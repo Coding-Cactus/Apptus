@@ -18,7 +18,7 @@ CorrieChat1:
 RomanChat2:
   user: Roman
   chat: Chat2
-  role: basic
+  role: administrator
 
 StantonChat2:
   user: Stanton
@@ -28,4 +28,19 @@ StantonChat2:
 CorrieChat2:
   user: Corrie
   chat: Chat2
-  role: basic
+  role: administrator
+
+EmaChat3:
+    user: Ema
+    chat: Chat3
+    role: basic
+
+BuddyChat3:
+    user: Buddy
+    chat: Chat3
+    role: administrator
+
+WalkerChat3:
+    user: Walker
+    chat: Chat3
+    role: basic

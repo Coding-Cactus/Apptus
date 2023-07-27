@@ -9,3 +9,8 @@ Chat2:
   owner: Earlie
   name: Test Chat 2
   colour: '#EF3E3E'
+
+Chat3:
+  owner: Ema
+  name: Test Chat 3
+  colour: '#6046FC'
