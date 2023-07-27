@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   validates :role, inclusion: { in: roles.keys }
   validates :name, presence: true, length: { in: 2..255 }
-  validates :colour, allow_blank: true, format: /#[A-F0-9]{6}/
+  validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :contact_number, allow_blank: true, length: { in: 12..12 }
 
   before_create do

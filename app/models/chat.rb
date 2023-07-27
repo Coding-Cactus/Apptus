@@ -8,7 +8,7 @@ class Chat < ApplicationRecord
   has_one :last_message, -> { order(created_at: :desc) }, class_name: 'Message'
 
   validates :name, presence: true, length: { in: 1..30 }
-  validates :colour, allow_blank: true, format: /#[A-F0-9]{6}/
+  validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :users, length: { minimum: 2, message: 'must be more than just yourself' }
 
   after_update_commit do
