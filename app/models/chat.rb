@@ -36,7 +36,7 @@ class Chat < ApplicationRecord
     members = users.select(:id).map(&:id)
     contacts = current_user.contacts.select(:id).map(&:id)
 
-    users << current_user
+    users << current_user unless members.include?(current_user.id)
     user_ids.each { |id| add_user(id, members, contacts) }
   end
 
