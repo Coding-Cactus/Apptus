@@ -16,7 +16,8 @@ system:
 #     'email' => Faker::Internet.email(name:),
 #     'encrypted_password' => '<' + "%= User.new.send(:password_digest, '#{Faker::Internet.password}') %>",
 #     'colour' => %w[#3D9DD2 #6046FC #74CD55 #D69637 #2CAEA6 #DB43C3 #EF3E3E #37BC74].sample,
-#     'contact_number' => Array.new(12) { ('0'..'9').to_a.sample }.join
+#     'contact_number' => Array.new(12) { ('0'..'9').to_a.sample }.join,
+#     'confirmed_at' =>  '<' + '%= Time.current %>'
 #   } }.to_yaml)
 # end
 
@@ -27,6 +28,7 @@ Roman:
   encrypted_password: "<%= User.new.send(:password_digest, '6TSqVW9m8') %>"
   colour: "#3D9DD2"
   contact_number: '486656822950'
+  confirmed_at: <%= Time.current %>
 
 
 Corrie:
@@ -35,6 +37,7 @@ Corrie:
   encrypted_password: "<%= User.new.send(:password_digest, 'p1Ly1J1cTMFLL') %>"
   colour: "#6046FC"
   contact_number: '028916285180'
+  confirmed_at: <%= Time.current %>
 
 
 Stevie:
@@ -43,6 +46,7 @@ Stevie:
   encrypted_password: "<%= User.new.send(:password_digest, 'oUTdhY6W8') %>"
   colour: "#D69637"
   contact_number: '021353774705'
+  confirmed_at: <%= Time.current %>
 
 
 Stanton:
@@ -51,6 +55,7 @@ Stanton:
   encrypted_password: "<%= User.new.send(:password_digest, 'Kf2wP2fu4Fl') %>"
   colour: "#37BC74"
   contact_number: '217677649296'
+  confirmed_at: <%= Time.current %>
 
 Earlie:
   name: Earlie Kling
@@ -58,6 +63,7 @@ Earlie:
   encrypted_password: "<%= User.new.send(:password_digest, 'LKpI6DpX') %>"
   colour: "#6046FC"
   contact_number: '896380692024'
+  confirmed_at: <%= Time.current %>
 
 Walker:
   name: Walker Bailey
@@ -65,6 +71,7 @@ Walker:
   encrypted_password: "<%= User.new.send(:password_digest, 'gIc4jjHjMJBWtROm') %>"
   colour: "#37BC74"
   contact_number: '321898730668'
+  confirmed_at: <%= Time.current %>
 
 Buddy:
   name: Buddy Balistreri
@@ -72,6 +79,7 @@ Buddy:
   encrypted_password: "<%= User.new.send(:password_digest, 'nV4hJLD9n2fbljf') %>"
   colour: "#74CD55"
   contact_number: '303861557744'
+  confirmed_at: <%= Time.current %>
 
 Ema:
   name: Ema Heaney
@@ -79,6 +87,7 @@ Ema:
   encrypted_password: "<%= User.new.send(:password_digest, 'F4yAlbgeSS') %>"
   colour: "#6046FC"
   contact_number: '575369835064'
+  confirmed_at: <%= Time.current %>
 
 Kasey:
   name: Kasey Shields
@@ -86,5 +95,6 @@ Kasey:
   encrypted_password: "<%= User.new.send(:password_digest, 'Th7hJl9Plbibloc') %>"
   colour: "#EF3E3E"
   contact_number: '852512408711'
+  confirmed_at: <%= Time.current %>
 
 
