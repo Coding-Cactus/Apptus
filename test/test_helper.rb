@@ -14,4 +14,5 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include ActionMailer::TestHelper
   include Rails.application.routes.url_helpers
+  include Devise::Test::IntegrationHelpers
 end
