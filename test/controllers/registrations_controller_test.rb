@@ -150,14 +150,15 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#update: should correctly change email" do
-    sign_in users(:Ema)
+    user = users(:Ema)
+    sign_in user
 
     new_email = "ema_anna_heaney@lakin.test"
 
     patch account_path, params: { user: { email: new_email, current_password: "F4yAlbgeSS" } }
 
     assert_redirected_to account_path
-    assert_equal new_email, User.find(users(:Ema).id).email
+    assert_equal new_email, user.reload.email
     assert_equal "Your account has been updated successfully.", flash[:notice]
   end
 
@@ -176,14 +177,15 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#update: should correctly change name" do
-    sign_in users(:Ema)
+    user = users(:Ema)
+    sign_in user
 
     new_name = "Ema Anna Heaney"
 
     patch account_path, params: { user: { name: new_name, current_password: "F4yAlbgeSS" } }
 
     assert_redirected_to account_path
-    assert_equal new_name, User.find(users(:Ema).id).name
+    assert_equal new_name, user.reload.name
     assert_equal "Your account has been updated successfully.", flash[:notice]
   end
 
@@ -208,7 +210,8 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#update: should correctly change password" do
-    sign_in users(:Ema)
+    user = users(:Ema)
+    sign_in user
 
     new_password = "cactus678"
 
@@ -221,7 +224,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_redirected_to account_path
-    assert User.find(users(:Ema).id).valid_password?(new_password)
+    assert user.reload.valid_password?(new_password)
     assert_equal "Your account has been updated successfully.", flash[:notice]
   end
 
@@ -252,13 +255,14 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#destroy: should delete user" do
-    sign_in users(:Ema)
+    user = users(:Ema)
+    sign_in user
 
     assert_difference "User.count", -1 do
       delete account_path
     end
 
     assert_redirected_to root_path
-    assert User.find_by(id: users(:Ema).id).nil?
+    assert User.find_by(id: user.id).nil?
   end
 end
