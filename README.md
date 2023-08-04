@@ -39,14 +39,17 @@ Hosted on [Railway](https://railway.app/), runs on Ruby `3.2.1`, Rails 7, [Supab
 #### Getting Started
 Firstly, [fork this repo](https://github.com/Coding-Cactus/Apptus/fork) to your GitHub account.
 ```shell
+# Clone to your local machine
 # Replace `YOURUSERNAME` with your GitHub username
 $ git clone 'https://github.com/YOURUSERNAME/Apptus.git'
 $ cd Apptus
 
+# Create new branch for your changes
 $ git checkout dev
 # Replace `my-new-feature` with something more descriptive
 $ git checkout -b my-new-feature
 
+# Install dependencies
 $ bundle install
 
 # Set dev environment variables now, before next commands
@@ -54,13 +57,16 @@ $ bundle install
 # Set up database
 $ rails db:setup
 
-# Run the server (you may need to install mailcatcher first)
+# Run mailcatcher
+$ gem install mailcatcher # If not already installed
 $ mailcatcher
+
+# Run the server
 $ rails s
 ```
 
 ### Running tests
-Make sure all tests run with no errors or warnings before making a PR. Run these tests with the test environment variables listed above.
+Make sure all tests run with no errors or warnings before making a PR. Run these tests with the Test Environment Variables listed above.
 
 ```shell
 $ rails test
