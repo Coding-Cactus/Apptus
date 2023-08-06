@@ -45,7 +45,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#create: should not send email for blank emails" do
-    post confirm_email_path, params: { user: { } }
+    post confirm_email_path, params: { user: {} }
 
     assert_response :unprocessable_entity
   end
