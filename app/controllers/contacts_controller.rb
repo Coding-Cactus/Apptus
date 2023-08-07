@@ -5,7 +5,8 @@ class ContactsController < ApplicationController
 
   before_action :set_selected
   before_action :authenticate_user!
-  before_action :check_contact_exists, only: %i[update destroy]
+  before_action :check_incoming_contact_exists, only: :update
+  before_action :check_pending_contact_exists, only: :destroy
 
   def index
     @contacts = current_user.contacts.order("LOWER(name)")
@@ -53,7 +54,11 @@ class ContactsController < ApplicationController
       params.require(:contact).permit(:contact_number)[:contact_number].delete("-")
     end
 
-    def check_contact_exists
-      @contact = current_user.find_contact(params[:id]) || not_found
+    def check_incoming_contact_exists
+      @contact = current_user.incoming_contacts.find_by(creator_id: params[:id]) || not_found
+    end
+
+    def check_pending_contact_exists
+      @contact = current_user.find_pending_contact(params[:id]) || not_found
     end
 end

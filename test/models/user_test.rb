@@ -275,10 +275,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0, users(:Stevie).contacts.length
   end
 
-  test "User#find_contact" do
-    assert_equal contacts(:'Stanton<->Roman'), users(:Stanton).find_contact(users(:Roman).id)
-    assert_equal contacts(:'Stanton->Stevie'), users(:Stevie).find_contact(users(:Stanton).id)
-    assert_nil users(:Roman).find_contact(users(:Earlie).id)
+  test "User#find_pending_contact" do
+    assert_nil users(:Roman).find_pending_contact(users(:Earlie).id) # Non-existent contact
+    assert_nil users(:Stanton).find_pending_contact(users(:Roman).id) # Accepted contact
+    assert_equal contacts(:'Stanton->Stevie'), users(:Stevie).find_pending_contact(users(:Stanton).id) # Pending contact
   end
 
   test "messages destroyed after user destroy" do
