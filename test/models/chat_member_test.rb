@@ -40,22 +40,22 @@ class ChatMemberTest < ActiveSupport::TestCase
   test "should send message in chat when chat member is created" do
     chat = chats(:Chat3)
 
-    assert_equal 0, chat.messages.length
+    assert_equal 1, chat.messages.length
 
     chat.chat_members.create(user: users(:Kasey))
 
-    assert_equal 1, chat.messages.length
+    assert_equal 2, chat.messages.length
     assert chat.messages.last.user.system?
     assert_equal "#{users(:Kasey).title_name} was added", chat.messages.last.content
   end
 
   test "should send message in chat when chat member is destroyed" do
     chat = chats(:Chat3)
-    assert_equal 0, chat.messages.length
+    assert_equal 1, chat.messages.length
 
     chat.chat_members.find_by(user: users(:Walker)).destroy
 
-    assert_equal 1, chats(:Chat3).messages.length
+    assert_equal 2, chats(:Chat3).messages.length
     assert chat.messages.last.user.system?
     assert_equal "#{users(:Walker).title_name} was removed", chat.messages.last.content
   end

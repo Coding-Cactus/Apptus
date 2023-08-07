@@ -197,7 +197,7 @@ class ChatTest < ActiveSupport::TestCase
     chat = chats(:Chat1)
     message_ids = chat.message_ids
 
-    assert_equal 2, message_ids.length
+    assert_equal 3, message_ids.length
 
     chat.destroy
 

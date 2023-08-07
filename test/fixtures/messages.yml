@@ -1,5 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+SystemChat1:
+  chat: Chat1
+  user: system
+  content: Chat created
+
 StantonChat1Message1:
   chat: Chat1
   user: Stanton
@@ -10,7 +15,17 @@ StantonChat1Message2:
   user: Stanton
   content: Hellooo!
 
+SystemChat2:
+  chat: Chat2
+  user: system
+  content: Chat created
+
 StantonChat2Message1:
   chat: Chat2
   user: Stanton
   content: Hey there
+
+SystemChat3:
+  chat: Chat3
+  user: system
+  content: Chat created
