@@ -19,9 +19,9 @@ class ContactsController < ApplicationController
 
   def create
     target = User.find_by(contact_number:)
+    contact = Contact.new(creator: current_user, target:)
 
-    if !target.nil? && target.id != current_user.id
-      Contact.create(creator_id: current_user.id, target_id: target.id, status: :pending)
+    if target != current_user && contact.save
       flash[:notice] = "Contact request sent successfully"
     else
       flash[:alert] = "Couldn't find a user with that contact number"
