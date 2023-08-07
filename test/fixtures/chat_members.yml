@@ -15,6 +15,11 @@ CorrieChat1:
   chat: Chat1
   role: basic
 
+EarlieChat2:
+  user: Earlie
+  chat: Chat2
+  role: basic
+
 RomanChat2:
   user: Roman
   chat: Chat2
