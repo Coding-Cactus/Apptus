@@ -68,6 +68,8 @@ $ rails s
 ### Running tests
 Make sure all tests run with no errors or warnings before making a PR. Run these tests with the Test Environment Variables listed above.
 
+[SimpleCov](https://github.com/simplecov-ruby/simplecov) is used to check code coverage, run `$ COVERAGE=1 rails test` to generate a report.
+
 ```shell
 $ rails test
 $ bundle exec bundler-audit --update
