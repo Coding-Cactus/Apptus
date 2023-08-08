@@ -51,7 +51,12 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to chat_path(Chat.last)
     assert_equal "Chat successfully created", flash[:notice]
     assert_equal "My chat", Chat.last.name
-    assert_equal [users(:Walker), users(:Ema), users(:Kasey)], Chat.last.users
+
+    members = Chat.last.users
+    assert_equal 3, members.length
+    assert members.include?(users(:Walker))
+    assert members.include?(users(:Ema))
+    assert members.include?(users(:Kasey))
   end
 
   test "#create: should not create chat with no name" do
