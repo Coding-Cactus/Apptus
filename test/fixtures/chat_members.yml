@@ -49,3 +49,28 @@ WalkerChat3:
     user: Walker
     chat: Chat3
     role: basic
+
+KaseyChat4:
+    user: Kasey
+    chat: Chat4
+    role: basic
+
+WalkerChat4:
+    user: Walker
+    chat: Chat4
+    role: administrator
+
+EmaChat4:
+    user: Ema
+    chat: Chat4
+    role: basic
+
+WalkerChat5:
+    user: Walker
+    chat: Chat5
+    role: basic
+
+EmaChat5:
+    user: Ema
+    chat: Chat5
+    role: basic
