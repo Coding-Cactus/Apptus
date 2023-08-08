@@ -5,7 +5,8 @@ class ContactsController < ApplicationController
 
   before_action :set_selected
   before_action :authenticate_user!
-  before_action :check_contact_exists, only: %i[update destroy]
+  before_action :check_incoming_contact_exists, only: :update
+  before_action :check_pending_contact_exists, only: :destroy
 
   def index
     @contacts = current_user.contacts.order("LOWER(name)")
@@ -19,9 +20,9 @@ class ContactsController < ApplicationController
 
   def create
     target = User.find_by(contact_number:)
+    contact = Contact.new(creator: current_user, target:)
 
-    if !target.nil? && target.id != current_user.id
-      Contact.create(creator_id: current_user.id, target_id: target.id, status: :pending)
+    if target != current_user && contact.save
       flash[:notice] = "Contact request sent successfully"
     else
       flash[:alert] = "Couldn't find a user with that contact number"
@@ -53,7 +54,11 @@ class ContactsController < ApplicationController
       params.require(:contact).permit(:contact_number)[:contact_number].delete("-")
     end
 
-    def check_contact_exists
-      @contact = current_user.find_contact(params[:id]) || not_found
+    def check_incoming_contact_exists
+      @contact = current_user.incoming_contacts.find_by(creator_id: params[:id]) || not_found
+    end
+
+    def check_pending_contact_exists
+      @contact = current_user.find_pending_contact(params[:id]) || not_found
     end
 end

@@ -47,9 +47,9 @@ class User < ApplicationRecord
         .union(User.joins(:outgoing_contacts).where(outgoing_contacts: { target_id: id, status: :accepted }))
   end
 
-  def find_contact(contact_user_id)
-    Contact.where(creator_id: id, target_id: contact_user_id)
-           .or(Contact.where(creator_id: contact_user_id, target_id: id)).first
+  def find_pending_contact(contact_user_id)
+    Contact.where(creator_id: id, target_id: contact_user_id, status: :pending)
+           .or(Contact.where(creator_id: contact_user_id, target_id: id, status: :pending)).first
   end
 
   protected

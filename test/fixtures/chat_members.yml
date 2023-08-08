@@ -15,6 +15,11 @@ CorrieChat1:
   chat: Chat1
   role: basic
 
+EarlieChat2:
+  user: Earlie
+  chat: Chat2
+  role: basic
+
 RomanChat2:
   user: Roman
   chat: Chat2
@@ -43,4 +48,29 @@ BuddyChat3:
 WalkerChat3:
     user: Walker
     chat: Chat3
+    role: basic
+
+KaseyChat4:
+    user: Kasey
+    chat: Chat4
+    role: basic
+
+WalkerChat4:
+    user: Walker
+    chat: Chat4
+    role: administrator
+
+EmaChat4:
+    user: Ema
+    chat: Chat4
+    role: basic
+
+WalkerChat5:
+    user: Walker
+    chat: Chat5
+    role: basic
+
+EmaChat5:
+    user: Ema
+    chat: Chat5
     role: basic
