@@ -40,7 +40,7 @@ jobs:
       - name: Run tests
         run: bin/rake
       - name: Run system tests
-        run: rails & bin/rake test:system
+        run: rails s & bin/rake test:system
 
   lint:
     runs-on: ubuntu-latest
