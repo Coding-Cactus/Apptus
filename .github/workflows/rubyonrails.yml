@@ -39,6 +39,8 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
+      - name: Run system tests
+        run: rails & bin/rake test:system
 
   lint:
     runs-on: ubuntu-latest
