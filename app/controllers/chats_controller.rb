@@ -44,7 +44,7 @@ class ChatsController < ApplicationController
   end
 
   def update
-    if @chat.update(new_chat_params)
+    if @chat.update(name: new_chat_params[:name])
       flash[:notice] = "Chat updated"
       redirect_to edit_chat_path(@chat)
     else
