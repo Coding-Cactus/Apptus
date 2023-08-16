@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  default_url_options Rails.application.config.action_mailer.default_url_options
-
   authenticated :user do
     root "chats#index", as: :authenticated_root
   end
