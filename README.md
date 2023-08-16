@@ -72,6 +72,7 @@ Make sure all tests run with no errors or warnings before making a PR. Run these
 
 ```shell
 $ rails test
+$ rails test:system
 $ bundle exec bundler-audit --update
 $ bundle exec brakeman -q -w2
 $ bundle exec rubocop --parallel
