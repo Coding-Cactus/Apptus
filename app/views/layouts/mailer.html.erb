@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-  <body>
+      #background {
+          background-color: #344E41;
+          padding: 50px 0;
+      }
+
+      #main {
+          font-family: 'Inter', sans-serif;
+          background-color: #DAD7CD;
+          max-width: 380px;
+          margin: 50px auto;
+          padding: 75px;
+          border-radius: 30px;
+          box-shadow: 0 8px 16px 0 #02020352;
+          color: #344E41;
+      }
+
+      h1 {
+          text-align: center;
+          font-size: 40px;
+          margin-bottom: 30px;
+          line-height: 1.1;
+      }
+
+      p {
+          font-size: 16px;
+          margin: 15px 0;
+          text-align: center;
+      }
+
+      a.button {
+          display: block;
+          width: max-content;
+          margin: 15px auto 0;
+          text-align: center;
+          background-color: #344E41;
+          color: #DAD7CD;
+          text-decoration: none;
+          padding: 15px 23px;
+          border-radius: 9px;
+          font-weight: bold;
+          box-shadow: 0 4px 8px 0 #02020329;
+      }
+  </style>
+</head>
+
+<body>
+<div id="background">
+  <div id="main">
     <%= yield %>
-  </body>
+  </div>
+</div>
+</body>
 </html>
