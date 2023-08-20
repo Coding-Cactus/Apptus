@@ -56,6 +56,8 @@ gem "image_processing", "~> 1.2"
 
 gem "active_storage_validations"
 
+gem "aws-sdk-s3", require: false
+
 gem "devise", github: "heartcombo/devise", branch: "main"
 
 gem "active_record_union"
