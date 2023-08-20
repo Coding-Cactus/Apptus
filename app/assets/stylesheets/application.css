@@ -142,6 +142,10 @@ input[type='checkbox'].login:checked:after {
     left: 0;
 }
 
+input[type='file'] {
+    display: none;
+}
+
 #error_explanation li {
     list-style: none;
     color: #f93d3d !important;
@@ -204,6 +208,7 @@ header {
     font-size: 80%;
     aspect-ratio: 1 / 1;
     border-radius: 1000000000px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,13 +216,21 @@ header {
     color: var(--foreground);
 }
 
-.pfp.small  { height: 30px; }
-.pfp.medium { height: 40px; }
-.pfp.big    { height: 50px; }
+.pfp img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 
-.pfp.small  span { font-size: 12px; }
-.pfp.medium span { font-size: 18px; }
-.pfp.big    span { font-size: 22px; }
+.pfp.small      { height: 30px; }
+.pfp.medium     { height: 40px; }
+.pfp.big        { height: 50px; }
+.pfp.massive    { height: 150px; }
+
+.pfp.small      span { font-size: 12px; }
+.pfp.medium     span { font-size: 18px; }
+.pfp.big        span { font-size: 22px; }
+.pfp.massive    span { font-size: 65px; }
 
 .link-blanket {
     position: absolute;
@@ -349,6 +362,10 @@ header {
 .dropdown-select li:hover {
     cursor: pointer;
     background-color: #bac5a8;
+}
+
+a.destructive {
+    color: #DD3030;
 }
 
 scrollbar {

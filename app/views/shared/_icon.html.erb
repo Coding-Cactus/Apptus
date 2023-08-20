@@ -1,7 +1,7 @@
-<div class="pfp <%= size %>" <%= "style=\"background-color: #{resource.colour};\"".html_safe if resource.pfp.nil? %>>
-  <% if resource.pfp.nil? %>
-    <span><%= resource.initials %></span>
+<div class="pfp <%= size %>" <%= "style=\"background-color: #{resource.colour};\"".html_safe unless resource.pfp.attached? %>>
+  <% if resource.pfp.attached? %>
+    <img src="<%= url_for(resource.pfp_thumbnail) %>" alt="<%= resource.name %>'s profile picture" />
   <% else %>
-    <img src="<%= resource.pfp %>" alt="<%= resource.name %>'s profile picture" />
+    <span><%= resource.initials %></span>
   <% end %>
 </div>

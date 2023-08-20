@@ -16,12 +16,17 @@ class User < ApplicationRecord
   has_many :incoming_contacts, foreign_key: "target_id",  class_name: "Contact", dependent: :destroy
   has_many :outgoing_contacts, foreign_key: "creator_id", class_name: "Contact", dependent: :destroy
 
+  has_one_attached :pfp do |attachable|
+    attachable.variant :thumb, resize_to_limit: [175, 175]
+  end
+
   enum role: %i[basic admin system]
 
   validates :role, inclusion: { in: roles.keys }
   validates :name, presence: true, length: { in: 2..255 }
   validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :contact_number, allow_blank: true, length: { in: 12..12 }
+  validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes }
 
   before_create do
     self.colour = COLOURS.sample
@@ -50,6 +55,11 @@ class User < ApplicationRecord
   def find_pending_contact(contact_user_id)
     Contact.where(creator_id: id, target_id: contact_user_id, status: :pending)
            .or(Contact.where(creator_id: contact_user_id, target_id: id, status: :pending)).first
+  end
+
+  def pfp_thumbnail
+    return pfp if pfp.content_type == "image/gif"
+    pfp.variant(:thumb).processed
   end
 
   protected

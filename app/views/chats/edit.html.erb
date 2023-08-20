@@ -1,6 +1,8 @@
 <div>
   <% if @chat.owner_id == current_user.id || @chat.administrators.include?(current_user) %>
     <%= form_with model: @chat, id: 'edit-chat-name' do |form| %>
+      <%= render "shared/pfp_input", f: form, resource: @chat, remove_pfp_path: destroy_chat_pfp_path(@chat) %>
+
       <%= form.label :name %>
 
       <div class="inline-submit">

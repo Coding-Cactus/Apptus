@@ -19,11 +19,12 @@ Rails.application.routes.draw do
     put    "account",        to: "registrations#update"
     delete "account",        to: "registrations#destroy"
     post   "account",        to: "registrations#create"
-    get    "register",       to: "registrations#new",    as: :new_user_registration
-    get    "account",        to: "registrations#edit",   as: :user_root
-    get    "account",        to: "registrations#edit",   as: :edit_user_registration
-    patch  "account",        to: "registrations#update", as: :user_registration
-    get    "account/cancel", to: "registrations#cancel", as: :cancel_user_registration
+    get    "register",       to: "registrations#new",         as: :new_user_registration
+    get    "account",        to: "registrations#edit",        as: :user_root
+    get    "account",        to: "registrations#edit",        as: :edit_user_registration
+    patch  "account",        to: "registrations#update",      as: :user_registration
+    get    "account/cancel", to: "registrations#cancel",      as: :cancel_user_registration
+    delete "account/pfp",    to: "registrations#destroy_pfp", as: :destroy_user_pfp
 
     put   "set-password",   to: "devise/passwords#update"
     post  "set-password",   to: "devise/passwords#create"
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
     resources :messages, only: :create
     resources :chat_members, only: %i[new create update destroy]
   end
+  delete "chats/:id/pfp", to: "chats#destroy_pfp", as: :destroy_chat_pfp
 
   resources :contacts, only: %i[index create update destroy]
   get "contacts/pending", to: "contacts#new", as: :pending_contacts
