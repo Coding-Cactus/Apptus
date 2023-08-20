@@ -1,0 +1,20 @@
+Stanton_pfp_attachment:
+  name: pfp
+  record: Stanton (User)
+  blob: Staton_pfp_blob
+
+Corrie_pfp_attachment:
+  name: pfp
+  record: Corrie (User)
+  blob: Corrie_pfp_blob
+
+Chat1_pfp_attachment:
+  name: pfp
+  record: Chat1 (Chat)
+  blob: Chat1_pfp_blob
+
+Chat5_pfp_attachment:
+  name: pfp
+  record: Chat5 (Chat)
+  blob: Chat5_pfp_blob
+
