@@ -214,4 +214,14 @@ class ChatTest < ActiveSupport::TestCase
 
     assert_equal 0, ChatMember.where(id: chat_member_ids).length
   end
+
+  test "#pfp_thumbnail" do
+    # should resize jpg
+    chat = chats(:Chat1)
+    assert_equal chat.pfp_thumbnail.variation.transformations[:resize_to_limit], [175, 175]
+
+    # should not resize gif
+    chat = chats(:Chat5)
+    assert_raises(NoMethodError) { chat.pfp_thumbnail.variation }
+  end
 end

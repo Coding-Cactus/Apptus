@@ -313,4 +313,14 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal 0, Contact.where(id: contact_ids).length
   end
+
+  test "#pfp_thumbnail" do
+    # should resize jpg
+    user = users(:Stanton)
+    assert_equal user.pfp_thumbnail.variation.transformations[:resize_to_limit], [175, 175]
+
+    # should not resize gif
+    user = users(:Corrie)
+    assert_raises(NoMethodError) { user.pfp_thumbnail.variation }
+  end
 end
