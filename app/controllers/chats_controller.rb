@@ -4,10 +4,10 @@ class ChatsController < ApplicationController
   layout "chat"
 
   before_action :authenticate_user!
-  before_action :load_chat, only: %i[show edit update destroy]
+  before_action :load_chat, only: %i[show edit update destroy destroy_pfp]
   before_action :load_chats, except: :destroy, unless: :turbo_frame_request?
   before_action :can_view_chat?, only: %i[show edit update destroy]
-  before_action :owner?, only: :destroy
+  before_action :owner?, only: %i[destroy destroy_pfp]
   before_action :admin_or_owner?, only: :update
   before_action :handle_selection, except: :destroy, unless: :turbo_frame_request?
 
@@ -44,7 +44,7 @@ class ChatsController < ApplicationController
   end
 
   def update
-    if @chat.update(name: new_chat_params[:name])
+    if @chat.update(update_chat_params)
       flash[:notice] = "Chat updated"
       redirect_to edit_chat_path(@chat)
     else
@@ -60,6 +60,13 @@ class ChatsController < ApplicationController
 
     flash[:notice] = "Chat successfully deleted"
     redirect_to root_path
+  end
+
+  def destroy_pfp
+    @chat.pfp.purge
+
+    flash[:notice] = "Chat picture deleted"
+    redirect_to edit_chat_path(@chat)
   end
 
   private
@@ -78,6 +85,10 @@ class ChatsController < ApplicationController
     def new_chat_params
       params.require(:chat).permit(:name, users: [])
     end
+
+  def update_chat_params
+      params.require(:chat).permit(:name, :pfp)
+  end
 
     def can_view_chat?
       not_found unless ChatMember.exists?(user_id: current_user.id, chat_id: params[:id])

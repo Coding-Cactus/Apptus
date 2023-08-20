@@ -1,5 +1,7 @@
 <div>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
+    <%= render 'shared/pfp_input', f:, resource:, remove_pfp_path: destroy_user_pfp_path %>
+
     <div class="field">
       <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>
