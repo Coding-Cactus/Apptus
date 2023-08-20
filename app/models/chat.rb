@@ -9,9 +9,14 @@ class Chat < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_one :last_message, -> { order(created_at: :desc) }, class_name: "Message"
 
+  has_one_attached :pfp do |attachable|
+    attachable.variant :thumb, resize_to_limit: [175, 175]
+  end
+
   validates :name, presence: true, length: { in: 1..30 }
   validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :users, length: { minimum: 2, message: "must be more than just yourself" }
+  validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes }
 
   after_update_commit do
     users.each do |user|
@@ -56,6 +61,11 @@ class Chat < ApplicationRecord
 
   def administrator_ids
     @administrator_ids ||= administrators.map(&:id)
+  end
+
+  def pfp_thumbnail
+    return pfp if pfp.content_type == "image/gif"
+    pfp.variant(:thumb).processed
   end
 
   private

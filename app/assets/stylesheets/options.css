@@ -123,3 +123,40 @@ form .inline-submit input[type='submit'] {
     font-size: 25px;
     font-weight: normal;
 }
+
+#upload-pfp {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: max-content;
+    cursor: pointer;
+}
+
+#upload-image-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #A3B18ACC;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#upload-image-cover div {
+    font-size: 16px;
+}
+
+#upload-image-cover svg {
+    height: 40px;
+}
+
+.pfp:hover + #upload-image-cover {
+    opacity: 1;
+}
