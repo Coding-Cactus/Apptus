@@ -60,6 +60,11 @@ GEM
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     active_record_union (1.3.0)
       activerecord (>= 4.0)
+    active_storage_validations (1.0.4)
+      activejob (>= 5.2.0)
+      activemodel (>= 5.2.0)
+      activestorage (>= 5.2.0)
+      activesupport (>= 5.2.0)
     activejob (7.0.6)
       activesupport (= 7.0.6)
       globalid (>= 0.3.6)
@@ -111,11 +116,15 @@ GEM
       reline (>= 0.3.1)
     docile (1.4.0)
     erubi (1.12.0)
+    ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hiredis (0.6.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.2)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (1.2.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -137,6 +146,7 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.18.0)
     msgpack (1.6.1)
@@ -225,6 +235,8 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
     ruby-progressbar (1.11.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     rubyzip (2.3.2)
     selenium-webdriver (4.8.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -279,6 +291,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (>= 7.0.5.1)
   active_record_union
+  active_storage_validations
   appsignal
   bootsnap
   brakeman
@@ -287,6 +300,7 @@ DEPENDENCIES
   debug
   devise!
   hiredis
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   pg (~> 1.1)
