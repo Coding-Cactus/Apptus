@@ -59,3 +59,8 @@ Ema<->Kasey:
     creator: Ema
     target: Kasey
     status: accepted
+
+Numbers<->Kimberly:
+    creator: Numbers
+    target: Kimberly
+    status: accepted
