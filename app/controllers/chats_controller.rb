@@ -86,9 +86,9 @@ class ChatsController < ApplicationController
       params.require(:chat).permit(:name, users: [])
     end
 
-  def update_chat_params
+    def update_chat_params
       params.require(:chat).permit(:name, :pfp)
-  end
+    end
 
     def can_view_chat?
       not_found unless ChatMember.exists?(user_id: current_user.id, chat_id: params[:id])
