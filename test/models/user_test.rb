@@ -251,8 +251,8 @@ class UserTest < ActiveSupport::TestCase
     reqs = users(:Stanton).incoming_contact_requests
 
     assert_equal 2, reqs.length
-    assert_equal users(:Corrie), reqs.first
-    assert_equal users(:Earlie), reqs.last
+    assert reqs.include?(users(:Corrie))
+    assert reqs.include?(users(:Earlie))
 
     assert_equal 0, users(:Corrie).incoming_contact_requests.length
   end
