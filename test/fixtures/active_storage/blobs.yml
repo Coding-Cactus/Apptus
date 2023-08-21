@@ -2,3 +2,4 @@ Staton_pfp_blob: <%= ActiveStorage::FixtureSet.blob filename: "Stanton.jpg" %>
 Corrie_pfp_blob: <%= ActiveStorage::FixtureSet.blob filename: "Corrie.gif" %>
 Chat1_pfp_blob: <%= ActiveStorage::FixtureSet.blob filename: "Chat1.jpg" %>
 Chat5_pfp_blob: <%= ActiveStorage::FixtureSet.blob filename: "Chat5.gif" %>
+Numbers_pfp_blob: <%= ActiveStorage::FixtureSet.blob filename: "Numbers.jpeg" %>

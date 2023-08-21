@@ -74,3 +74,13 @@ EmaChat5:
     user: Ema
     chat: Chat5
     role: basic
+
+NumbersChat6:
+    user: Numbers
+    chat: Chat6
+    role: basic
+
+KimberlyChat6:
+    user: Kimberly
+    chat: Chat6
+    role: basic

@@ -18,3 +18,8 @@ Chat5_pfp_attachment:
   record: Chat5 (Chat)
   blob: Chat5_pfp_blob
 
+Numbers_pfp_attachment:
+  name: pfp
+  record: Numbers (User)
+  blob: Numbers_pfp_blob
+

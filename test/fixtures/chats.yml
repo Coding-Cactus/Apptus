@@ -24,3 +24,8 @@ Chat5:
     owner: Walker
     name: Test Chat 5
     colour: '#D69637'
+
+Chat6:
+  owner: Numbers
+  name: Test Chat 6
+  colour: '#6046FC'
