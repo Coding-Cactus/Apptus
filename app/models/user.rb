@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 2..255 }
   validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :contact_number, allow_blank: true, length: { in: 12..12 }
-  validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes }
+  validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes, message: "must be less than 5MB" }
 
   before_create do
     self.colour = COLOURS.sample
@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def pfp_thumbnail
-    return pfp if pfp.content_type == "image/gif"
+    return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
     pfp.variant(:thumb).processed
   end
 
