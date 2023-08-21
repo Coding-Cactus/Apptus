@@ -16,7 +16,7 @@ class Chat < ApplicationRecord
   validates :name, presence: true, length: { in: 1..30 }
   validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :users, length: { minimum: 2, message: "must be more than just yourself" }
-  validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes }
+  validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes, message: "must be less than 5MB" }
 
   after_update_commit do
     users.each do |user|
@@ -64,7 +64,7 @@ class Chat < ApplicationRecord
   end
 
   def pfp_thumbnail
-    return pfp if pfp.content_type == "image/gif"
+    return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
     pfp.variant(:thumb).processed
   end
 
