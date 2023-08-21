@@ -39,3 +39,8 @@ SystemChat5:
   chat: Chat5
   user: system
   content: Chat created
+
+SystemChat6:
+  chat: Chat6
+  user: system
+  content: Chat created
