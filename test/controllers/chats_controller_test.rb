@@ -249,6 +249,47 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "#update: should correctly change pfp" do
+    user = users(:Ema)
+    sign_in user
+    chat = chats(:Chat3)
+
+    new_pfp = fixture_file_upload("new_pfp.png", "image/png")
+
+    patch chat_path(chat), params: { chat: { pfp: new_pfp } }
+
+    assert_redirected_to edit_chat_path(chat)
+    assert chat.reload.pfp.attached?
+    assert_equal "Chat updated", flash[:notice]
+  end
+
+  test "#update: should not accept svg image" do
+    user = users(:Ema)
+    sign_in user
+    chat = chats(:Chat3)
+
+    new_pfp = fixture_file_upload("new_pfp.svg", "image/svg+xml")
+
+    patch chat_path(chat), params: { chat: { pfp: new_pfp } }
+
+    assert_response :unprocessable_entity
+    assert_not chat.reload.pfp.attached?
+  end
+
+  test "#update: should not accept image over 5MB" do
+    user = users(:Ema)
+    sign_in user
+    chat = chats(:Chat3)
+
+    new_pfp = fixture_file_upload("large.jpg", "image/jpeg", true)
+
+    patch chat_path(chat), params: { chat: { pfp: new_pfp } }
+
+    assert_response :unprocessable_entity
+    assert_not chat.reload.pfp.attached?
+    assert_select "#error_explanation li", "Pfp must be less than 5MB"
+  end
+
   test "#update: name length check" do
     sign_in users(:Earlie)
 
@@ -317,5 +358,18 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_path
     assert_equal "Chat successfully deleted", flash[:notice]
+  end
+
+  test "#destroy_pfp: should delete pfp" do
+    user = users(:Walker)
+    sign_in user
+    chat = chats(:Chat5)
+
+    assert chat.pfp.attached?
+
+    delete destroy_chat_pfp_path(chat)
+
+    assert_redirected_to edit_chat_path
+    assert_not chat.reload.pfp.attached?
   end
 end

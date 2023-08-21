@@ -135,6 +135,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
+    assert_select "input[name='user[pfp]'][type='file']"
     assert_select "input[name='user[email]']"
     assert_select "input[name='user[name]']"
     assert_select "input[name='user[password]']"
@@ -147,6 +148,44 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     patch account_path, params: { user: { name: "Ema Anna Heaney", current_password: "F4yAlbgeSS" } }
 
     assert_redirected_to new_user_session_path
+  end
+
+  test "#update: should correctly change pfp" do
+    user = users(:Ema)
+    sign_in user
+
+    new_pfp = fixture_file_upload("new_pfp.png", "image/png")
+
+    patch account_path, params: { user: { pfp: new_pfp, current_password: "F4yAlbgeSS" } }
+
+    assert_redirected_to account_path
+    assert user.reload.pfp.attached?
+    assert_equal "Your account has been updated successfully.", flash[:notice]
+  end
+
+  test "#update: should not accept svg image" do
+    user = users(:Ema)
+    sign_in user
+
+    new_pfp = fixture_file_upload("new_pfp.svg", "image/svg+xml")
+
+    patch account_path, params: { user: { pfp: new_pfp, current_password: "F4yAlbgeSS" } }
+
+    assert_response :unprocessable_entity
+    assert_not user.reload.pfp.attached?
+  end
+
+  test "#update: should not accept image over 5MB" do
+    user = users(:Ema)
+    sign_in user
+
+    new_pfp = fixture_file_upload("large.jpg", "image/jpeg", true)
+
+    patch account_path, params: { user: { pfp: new_pfp, current_password: "F4yAlbgeSS" } }
+
+    assert_response :unprocessable_entity
+    assert_not user.reload.pfp.attached?
+    assert_select "#error_explanation li", "Pfp must be less than 5MB"
   end
 
   test "#update: should correctly change email" do
@@ -264,5 +303,22 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_path
     assert User.find_by(id: user.id).nil?
+  end
+
+  test "#destroy_pfp: should redirect if not logged in" do
+    delete destroy_user_pfp_path
+    assert_redirected_to new_user_session_path
+  end
+
+  test "#destroy_pfp: should delete pfp" do
+    user = users(:Numbers)
+    sign_in user
+
+    assert user.pfp.attached?
+
+    delete destroy_user_pfp_path
+
+    assert_redirected_to account_path
+    assert_not user.reload.pfp.attached?
   end
 end
