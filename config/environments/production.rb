@@ -75,8 +75,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     port: "587",
     address: "smtp.mailersend.net",
-    user_name: ENV["EMAIL_USERNAME"],
-    password:  ENV["EMAIL_PASSWORD"]
+    user_name: Rails.application.credentials.dig(:mailersend, :username),
+    password:  Rails.application.credentials.dig(:mailersend, :password)
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
