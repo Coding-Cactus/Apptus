@@ -8,7 +8,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-APPTUS_VERSION = "0.2.1"
+APPTUS_VERSION = "0.3.0"
 
 module Apptus
   class Application < Rails::Application
