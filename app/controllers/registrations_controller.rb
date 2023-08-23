@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class RegistrationsController < Devise::RegistrationsController
-  layout "settings", only: :edit
-  before_action :set_selected, only: :edit
+  layout "settings", only: %i[edit update]
+  before_action :set_selected, only: %i[edit update]
 
   def destroy_pfp
     redirect_to new_user_session_path, alert: "You must be signed in to do that." and return unless user_signed_in?
