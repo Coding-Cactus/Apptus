@@ -65,7 +65,7 @@ class Chat < ApplicationRecord
 
   def pfp_thumbnail
     return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
-    pfp.variant(:thumb).processed
+    pfp.variant(:thumb)
   end
 
   private
