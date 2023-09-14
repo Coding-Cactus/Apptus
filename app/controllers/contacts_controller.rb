@@ -9,13 +9,13 @@ class ContactsController < ApplicationController
   before_action :check_pending_contact_exists, only: :destroy
 
   def index
-    @contacts = current_user.contacts.order("LOWER(name)")
+    @contacts = current_user.contacts.order("LOWER(name)").with_attached_pfp
   end
 
   def new
     @new_contact       = Contact.new
-    @incoming_requests = current_user.incoming_contact_requests.order("LOWER(name)")
-    @outgoing_requests = current_user.outgoing_contact_requests.order("LOWER(name)")
+    @incoming_requests = current_user.incoming_contact_requests.order("LOWER(name)").with_attached_pfp
+    @outgoing_requests = current_user.outgoing_contact_requests.order("LOWER(name)").with_attached_pfp
   end
 
   def create

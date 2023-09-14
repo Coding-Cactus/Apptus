@@ -1,6 +1,6 @@
 <div class="pfp <%= size %>" <%= "style=\"background-color: #{resource.colour};\"".html_safe unless resource.pfp.attached? %>>
   <% if resource.pfp.attached? %>
-    <img src="<%= url_for(resource.pfp_thumbnail) %>" alt="<%= resource.name %>'s profile picture" />
+    <%= image_tag url_for(resource.pfp_thumbnail), alt: "#{resource.name}'s profile picture", size: 175 %>
   <% else %>
     <span><%= resource.initials %></span>
   <% end %>

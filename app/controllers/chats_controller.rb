@@ -16,7 +16,7 @@ class ChatsController < ApplicationController
   def show
     @show_page = true
     @message = @chat.messages.build
-    @message_groups = @chat.messages.includes(:user, :statuses).order(created_at: :desc).limit(50)
+    @message_groups = @chat.messages.includes({ user: { pfp_attachment: :blob } }, :statuses).order(created_at: :desc).limit(50)
                            .reverse.reduce([]) { |groups, msg| group_up_message(groups, msg) }
   end
 
@@ -40,7 +40,7 @@ class ChatsController < ApplicationController
   end
 
   def edit
-    @members = @chat.chat_members.includes(:user).order("LOWER(users.name)").references(:users)
+    @members = @chat.chat_members.includes(user: { pfp_attachment: :blob }).order("LOWER(users.name)").references(:users)
   end
 
   def update
@@ -48,7 +48,7 @@ class ChatsController < ApplicationController
       flash[:notice] = "Chat updated"
       redirect_to edit_chat_path(@chat)
     else
-      @members = @chat.chat_members.includes(:user)
+      @members = @chat.chat_members.includes(user: { pfp_attachment: :blob })
 
       flash.now[:alert] = "Something went wrong when updating the chat"
       render :edit, status: :unprocessable_entity
@@ -79,7 +79,7 @@ class ChatsController < ApplicationController
     end
 
     def load_chats
-      @chats = current_user.chats.includes(:last_message).order("messages.created_at" => :desc)
+      @chats = current_user.chats.includes(:last_message).order("messages.created_at" => :desc).with_attached_pfp
     end
 
     def new_chat_params
