@@ -1,25 +1,30 @@
-<div id="auth-container">
-  <h2>Apptus</h2>
+<div id="auth-page">
+  <nav id="auth-nav">
+    <%= image_tag asset_path("logo.png"), id: "top-left-logo", size: 50 %>
+    <h2>Apptus</h2>
+  </nav>
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
-    <%= f.hidden_field :reset_password_token %>
+    <div id="auth-form-container">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
+        <%= f.hidden_field :reset_password_token %>
 
-    <div class="field">
-      <%= f.label :password, "New password" %>
-      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: "Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
+        <div class="field">
+          <%= f.label :password, "New password" %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: "Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, "Confirm new password" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
+        </div>
+
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="actions">
+          <%= f.submit "Change my password" %>
+        </div>
+
+        <%= render "devise/shared/links" %>
+      <% end %>
     </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation, "Confirm new password" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
-    </div>
-
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="actions">
-      <%= f.submit "Change my password" %>
-    </div>
-
-    <%= render "devise/shared/links" %>
-  <% end %>
 </div>

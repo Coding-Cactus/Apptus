@@ -1,6 +1,32 @@
-#auth-container {
+#auth-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+}
+
+#auth-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 24px;
+    padding-left: 32px;
+}
+
+#auth-nav img {
+    width: 40px;
+    height: 40px;
+}
+
+#auth-nav h2 {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+#auth-form-container {
     width: 100%;
     min-height: 100%;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +34,7 @@
     gap: 20px;
 }
 
-#auth-container form {
+#auth-form-container form {
     width: 95vw;
     max-width: 500px;
     display: flex;
