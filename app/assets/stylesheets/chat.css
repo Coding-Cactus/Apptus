@@ -257,6 +257,16 @@
     max-width: calc((100vw - var(--list-width) - 40px) * 0.45);
 }
 
+.top .message-author {
+    font-weight: bold;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.message-author {
+    display: none;
+}
+
 .message-container.bottom .message { border-bottom-left-radius: 7px; }
 
 .pfp-filler {
