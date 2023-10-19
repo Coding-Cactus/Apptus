@@ -5,8 +5,8 @@ export default class extends Controller {
         const newMessage = this.element
         const userId = newMessage.getAttribute("data-user-id")
 
-        const previousMessage = this.element.previousElementSibling
-        const previousUserId = previousMessage.getAttribute("data-user-id")
+        const previousMessage = this.element?.previousElementSibling
+        const previousUserId = previousMessage?.getAttribute("data-user-id")
 
         if (userId === previousUserId) {
             previousMessage.classList.remove("bottom")
@@ -23,6 +23,9 @@ export default class extends Controller {
             newMessage.classList.add("top")
         }
 
-        newMessage.scrollIntoView()
+        const chat = this.element.parentElement
+        if (chat.scrollHeight - chat.scrollTop - chat.offsetHeight <= this.element.offsetHeight + 10) {
+            newMessage.scrollIntoView()
+        }
     }
 }

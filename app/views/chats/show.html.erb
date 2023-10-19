@@ -1,8 +1,11 @@
 <%= turbo_stream_from @chat, 'messages' %>
 
 <div id="messages-page">
-  <div id="messages" data-controller="scroll">
-    <%= render 'message_groups', groups: @message_groups %>
+  <%= turbo_frame_tag "page_handler" %>
+
+  <div id="messages" data-controller="scroll" data-action="scroll->scroll#infiniteScroll wheel->scroll#wheelScroll">
+    <%= render "messages/pager", messages: @messages %>
+    <%= render 'message_groups', groups: @message_groups, from_infinite_scroll: false %>
   </div>
 
   <%= form_with model: [@chat, @message], id: 'new-message', data: { controller: 'clear-form', action: 'turbo:submit-end->clear-form#clear' } do |form| %>

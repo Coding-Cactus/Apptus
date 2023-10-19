@@ -15,9 +15,14 @@ class ChatsController < ApplicationController
 
   def show
     @show_page = true
-    @message = @chat.messages.build
-    @message_groups = @chat.messages.includes({ user: { pfp_attachment: :blob } }, :statuses).order(created_at: :desc).limit(50)
-                           .reverse.reduce([]) { |groups, msg| group_up_message(groups, msg) }
+    @message   = @chat.messages.build
+
+    @messages = @chat.messages.includes({ user: { pfp_attachment: :blob } }, :statuses).order(created_at: :desc).page(params[:page])
+    @message_groups = @messages.reverse.reduce([]) { |groups, msg| group_up_message(groups, msg) }
+
+    if params[:page].present?
+      render partial: "infinite_scroll"
+    end
   end
 
   def new

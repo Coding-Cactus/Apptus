@@ -218,6 +218,13 @@
     gap: 3px;
 }
 
+#page_handler { display: none; }
+
+#scroll-link {
+    visibility: hidden;
+    padding-top: 50px;
+}
+
 .message-container {
     display: flex;
     width: 100%;
