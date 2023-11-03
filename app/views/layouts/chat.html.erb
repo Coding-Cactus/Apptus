@@ -24,7 +24,7 @@
           flex-direction: row-reverse;
       }
 
-      .message-container[data-user-id="<%= current_user.id %>"] .message-and-triangle svg {
+      .message-container[data-user-id="<%= current_user.id %>"] .message-and-triangle .triangle svg {
           transform: rotateY(180deg) translateX(1px);
       }
 
@@ -41,7 +41,7 @@
           flex-direction: row-reverse;
       }
 
-      .message-container:not([data-user-id="<%= current_user.id %>"]) .msg-info svg {
+      .message-container:not([data-user-id="<%= current_user.id %>"]) .message-status svg {
           display: none;
       }
     </style>

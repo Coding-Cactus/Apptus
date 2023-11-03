@@ -10,22 +10,24 @@
   <% end %>
 
   <div class="message-and-triangle">
-    <% if top || top.nil? %>
-      <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
-        <path d="M700 89C700 39.8466 660.153 0 611 0H214.865C135.575 0 95.8657 95.8657 151.933 151.933L548.067 548.067C604.134 604.134 700 564.425 700 485.135V89Z" />
-        <path d="M700 0H297.664V297.664L522.819 522.819L700 700V0Z" />
-      </svg>
-  <% else %>
-      <div class="triangle-filler"></div>
-    <% end %>
+    <div class="triangle">
+      <% if top || top.nil? %>
+          <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+            <path d="M700 89C700 39.8466 660.153 0 611 0H214.865C135.575 0 95.8657 95.8657 151.933 151.933L548.067 548.067C604.134 604.134 700 564.425 700 485.135V89Z" />
+            <path d="M700 0H297.664V297.664L522.819 522.819L700 700V0Z" />
+          </svg>
+        <% else %>
+          <div class="triangle-filler"></div>
+        <% end %>
+    </div>
 
-    <div class="message">
+    <div class="message" data-message-id="<%= message.id %>">
       <p class="message-author"><%= message.user.title_name %></p>
 
       <p><%= message.content %></p>
 
       <div class="msg-info">
-        <!--%= render 'messages/status', status: message.lowest_status %-->
+        <%= render 'messages/status', status: message.lowest_status %>
 
         <span data-controller="nice-date" data-timestamp="<%= message.created_at.to_i %>"></span>
       </div>

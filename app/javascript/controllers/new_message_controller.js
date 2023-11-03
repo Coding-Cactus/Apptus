@@ -24,6 +24,17 @@ export default class extends Controller {
         }
 
         const chat = this.element.parentElement
+
+        // If message is not from current user
+        if (window.getComputedStyle(newMessage).getPropertyValue("flex-direction") === "row") {
+            document.querySelector("#mark-as-read").setAttribute("data-enabled", "true")
+
+            // Not enough messages to cause a scroll yet, so send event manually to mark messages as read
+            if (chat.scrollHeight === chat.offsetHeight) {
+                chat.dispatchEvent(new CustomEvent("scroll"))
+            }
+        }
+
         if (chat.scrollHeight - chat.scrollTop - chat.offsetHeight <= this.element.offsetHeight + 10) {
             newMessage.scrollIntoView()
         }

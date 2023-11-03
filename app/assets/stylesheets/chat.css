@@ -231,7 +231,7 @@
     gap: 5px;
 }
 
-.message-container:not(.top) .pfp, .message-container:not(.top) .message-and-triangle svg {
+.message-container:not(.top) .pfp {
     opacity: 0;
 }
 
@@ -285,11 +285,15 @@
     align-items: flex-start;
 }
 
-.triangle-filler, .message-and-triangle svg {
+.message-and-triangle .triangle {
+    display: flex;
+}
+
+.triangle-filler, .message-and-triangle .triangle svg {
     width: 15px;
 }
 
-.message-and-triangle svg path, .message-and-triangle svg line {
+.message-and-triangle .triangle svg path, .message-and-triangle .triangle svg line {
     fill: var(--secondary-bg);
     stroke: var(--secondary-bg);
 }
@@ -311,8 +315,17 @@
     word-wrap: break-word;
 }
 
-.message svg {
+.message-status svg {
     width: 20px;
+}
+
+.message-status svg path {
+    stroke: var(--foreground);
+    fill: none;
+}
+
+.message-status svg.read path {
+    stroke: #65E538;
 }
 
 #new-message {

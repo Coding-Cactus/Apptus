@@ -10,10 +10,16 @@ export default class extends Controller {
     connect() {
         scrollToBottom(this.element)
 
+        if (this.element.scrollHeight === this.element.offsetHeight) {
+            this.element.dispatchEvent(new CustomEvent("scroll"))
+        }
+
         this.element.addEventListener("turbo:frame-load", () => { scrollToBottom(this.element) })
     }
 
-    infiniteScroll() {
+    scrollLogic() {
+        const markReadLink = document.querySelector("#mark-as-read")
+
         if (this.blockScroll) {
             if (Date.now() - this.lastScroll > 300) {
                 this.blockScroll = false;
@@ -30,6 +36,12 @@ export default class extends Controller {
 
                 this.lastLoad = Date.now()
                 this.blockScroll = true;
+            } else if (
+                this.element.scrollHeight - this.element.scrollTop - this.element.offsetHeight <= 10
+                && markReadLink.getAttribute("data-enabled") === "true"
+            ) {
+                markReadLink.setAttribute("data-enabled", "false")
+                markReadLink.click()
             }
         }
 
