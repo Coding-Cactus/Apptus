@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "page_handler" do  %>
+  <%= turbo_stream_action_tag(
+        "prepend",
+        target: "messages",
+        template: %(#{render "message_groups", groups: @message_groups, from_infinite_scroll: true})
+      ) %>
+  <%= turbo_stream_action_tag(
+        "prepend",
+        target: "messages",
+        template: %(#{render "messages/pager", messages: @messages})
+      ) %>
+<% end %>

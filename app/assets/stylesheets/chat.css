@@ -218,13 +218,20 @@
     gap: 3px;
 }
 
+#page_handler { display: none; }
+
+#scroll-link {
+    visibility: hidden;
+    padding-top: 50px;
+}
+
 .message-container {
     display: flex;
     width: 100%;
     gap: 5px;
 }
 
-.message-container:not(.top) .pfp, .message-container:not(.top) .message-and-triangle svg {
+.message-container:not(.top) .pfp {
     opacity: 0;
 }
 
@@ -257,6 +264,16 @@
     max-width: calc((100vw - var(--list-width) - 40px) * 0.45);
 }
 
+.top .message-author {
+    font-weight: bold;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.message-author {
+    display: none;
+}
+
 .message-container.bottom .message { border-bottom-left-radius: 7px; }
 
 .pfp-filler {
@@ -268,11 +285,15 @@
     align-items: flex-start;
 }
 
-.triangle-filler, .message-and-triangle svg {
+.message-and-triangle .triangle {
+    display: flex;
+}
+
+.triangle-filler, .message-and-triangle .triangle svg {
     width: 15px;
 }
 
-.message-and-triangle svg path, .message-and-triangle svg line {
+.message-and-triangle .triangle svg path, .message-and-triangle .triangle svg line {
     fill: var(--secondary-bg);
     stroke: var(--secondary-bg);
 }
@@ -294,8 +315,17 @@
     word-wrap: break-word;
 }
 
-.message svg {
+.message-status svg {
     width: 20px;
+}
+
+.message-status svg path {
+    stroke: var(--foreground);
+    fill: none;
+}
+
+.message-status svg.read path {
+    stroke: #65E538;
 }
 
 #new-message {

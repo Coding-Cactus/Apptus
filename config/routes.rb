@@ -41,7 +41,8 @@ Rails.application.routes.draw do
     resources :messages, only: :create
     resources :chat_members, only: %i[new create update destroy]
   end
-  delete "chats/:id/pfp", to: "chats#destroy_pfp", as: :destroy_chat_pfp
+  delete "chats/:id/pfp",          to: "chats#destroy_pfp", as: :destroy_chat_pfp
+  patch  "chats/:id/mark-as-read", to: "chats#mark_as_read", as: :mark_as_read
 
   resources :contacts, only: %i[index create update destroy]
   get "contacts/pending", to: "contacts#new", as: :pending_contacts
