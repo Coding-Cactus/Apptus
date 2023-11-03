@@ -1,28 +1,33 @@
-<div id="auth-container">
-  <h2>Apptus</h2>
+<div id="auth-page">
+  <nav id="auth-nav">
+    <%= image_tag asset_path("logo.png"), id: "top-left-logo", size: 50 %>
+    <h2>Apptus</h2>
+  </nav>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", required: true %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="field" id="remember-me">
-        <%= f.check_box :remember_me, class: 'login' %>
-        <%= f.label :remember_me %>
+  <div id="auth-form-container">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>
       </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", required: true %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field" id="remember-me">
+          <%= f.check_box :remember_me, class: 'login' %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+
+      <%= render "devise/shared/links" %>
     <% end %>
-
-    <div class="actions">
-      <%= f.submit "Log in" %>
-    </div>
-
-    <%= render "devise/shared/links" %>
-  <% end %>
+  </div>
 </div>

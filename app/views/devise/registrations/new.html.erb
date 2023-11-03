@@ -1,33 +1,38 @@
-<div id="auth-container">
-  <h2>Apptus</h2>
+<div id="auth-page">
+  <nav id="auth-nav">
+    <%= image_tag asset_path("logo.png"), id: "top-left-logo", size: 50 %>
+    <h2>Apptus</h2>
+  </nav>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>
+    <div id="auth-form-container">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :name %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Full Name", required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, "Password Confirmation" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
+        </div>
+
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="actions">
+          <%= f.submit "Register" %>
+        </div>
+
+        <%= render "devise/shared/links" %>
+      <% end %>
     </div>
-
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Full Name", required: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation, "Password Confirmation" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", minlength: @minimum_password_length, maxlength: 128, required: true %>
-    </div>
-
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="actions">
-      <%= f.submit "Register" %>
-    </div>
-
-    <%= render "devise/shared/links" %>
-  <% end %>
 </div>
