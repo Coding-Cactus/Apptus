@@ -6,7 +6,7 @@ class Message < ApplicationRecord
   belongs_to :chat, touch: true
   belongs_to :user
 
-  has_many :statuses
+  has_many :statuses, dependent: :destroy
 
   validates :content, presence: true, length: { maximum: 2500 }
 
