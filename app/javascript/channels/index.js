@@ -1,1 +1,1 @@
-import "./messages_statuses_channel"
+import "channels/messages_statuses_channel"
