@@ -9,7 +9,7 @@ class Chat < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_one :last_message, -> { order(created_at: :desc) }, class_name: "Message"
 
-  has_one_attached :pfp do |attachable|
+  has_one_attached :pfp, dependent: :destroy do |attachable|
     attachable.variant :thumb, resize_to_limit: [175, 175]
   end
 
@@ -65,7 +65,7 @@ class Chat < ApplicationRecord
 
   def pfp_thumbnail
     return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
-    pfp.variant(:thumb).processed
+    pfp.variant(:thumb)
   end
 
   private

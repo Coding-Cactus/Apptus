@@ -4,9 +4,9 @@ class ChatsController < ApplicationController
   layout "chat"
 
   before_action :authenticate_user!
-  before_action :load_chat, only: %i[show edit update destroy destroy_pfp]
+  before_action :load_chat, only: %i[show edit update destroy destroy_pfp mark_as_read]
   before_action :load_chats, except: :destroy, unless: :turbo_frame_request?
-  before_action :can_view_chat?, only: %i[show edit update destroy]
+  before_action :can_view_chat?, only: %i[show edit update destroy mark_as_read]
   before_action :owner?, only: %i[destroy destroy_pfp]
   before_action :admin_or_owner?, only: :update
   before_action :handle_selection, except: :destroy, unless: :turbo_frame_request?
@@ -15,9 +15,15 @@ class ChatsController < ApplicationController
 
   def show
     @show_page = true
-    @message = @chat.messages.build
-    @message_groups = @chat.messages.includes(:user, :statuses).order(created_at: :desc).limit(50)
-                           .reverse.reduce([]) { |groups, msg| group_up_message(groups, msg) }
+    @message   = @chat.messages.build
+
+    @messages = @chat.messages.includes({ user: { pfp_attachment: :blob } }, :statuses).order(created_at: :desc).page(params[:page])
+    @message_groups = @messages.reverse.reduce([]) { |groups, msg| group_up_message(groups, msg) }
+    @has_unread_messages = Status.exists?(message: @messages, user: current_user, status: "received")
+
+    if params[:page].present?
+      render partial: "infinite_scroll"
+    end
   end
 
   def new
@@ -40,7 +46,7 @@ class ChatsController < ApplicationController
   end
 
   def edit
-    @members = @chat.chat_members.includes(:user).order("LOWER(users.name)").references(:users)
+    @members = @chat.chat_members.includes(user: { pfp_attachment: :blob }).order("LOWER(users.name)").references(:users)
   end
 
   def update
@@ -48,10 +54,32 @@ class ChatsController < ApplicationController
       flash[:notice] = "Chat updated"
       redirect_to edit_chat_path(@chat)
     else
-      @members = @chat.chat_members.includes(:user)
+      @members = @chat.chat_members.includes(user: { pfp_attachment: :blob })
 
       flash.now[:alert] = "Something went wrong when updating the chat"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def mark_as_read
+    statuses = Status.joins(:message).where(
+      status: "received",
+      user: current_user,
+      message: { chat_id: @chat.id }
+    ).where.not(message: { user: [current_user, User.find_by(role: :system)] })
+
+    # Load and save statuses so they can be used in loop below, otherwise query returns nothing
+    # due to all statuses having been set to read
+    statuses_tmp = statuses.to_a
+
+    statuses.update_all(status: "read")
+
+    statuses_tmp.reduce(Hash.new { |h, k| h[k] = [] }) do |users, status|
+      message = status.message
+      users[message.user] << message.id if message.lowest_status == "read"
+      users
+    end.each do |user, messages|
+      MessagesStatusesChannel.broadcast_to(user, messages)
     end
   end
 
@@ -79,7 +107,7 @@ class ChatsController < ApplicationController
     end
 
     def load_chats
-      @chats = current_user.chats.includes(:last_message).order("messages.created_at" => :desc)
+      @chats = current_user.chats.includes(:last_message).order("messages.created_at" => :desc).with_attached_pfp
     end
 
     def new_chat_params

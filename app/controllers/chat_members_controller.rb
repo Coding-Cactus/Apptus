@@ -57,7 +57,7 @@ class ChatMembersController < ApplicationController
     end
 
     def load_chats
-      @chats = current_user.chats.includes(:last_message).order("messages.created_at" => :desc)
+      @chats = current_user.chats.with_attached_pfp.includes(:last_message).order("messages.created_at" => :desc)
     end
 
     def populate_chat

@@ -3,3 +3,7 @@
     <%= render message, top: i == 0, bottom: i + 1 == messages.length %>
   <% end %>
 <% end %>
+
+<% if from_infinite_scroll %>
+  <div class="hidden" data-scroll-target="loadedMessagesAnnouncer"></div>
+<% end %>

@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Apptus</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= favicon_link_tag asset_path('favicon.png') %>
+
+    <meta name="description" content="Feature rich group chatting website. Communicate with ease, on any device!" />
+    <meta name="author" content="CodingCactus" />
+    <meta name="theme-color" content="#588157" />
+    <meta name="keywords" content="apptus,group,chat,group chat,chatting,communication,online,free" />
+
+    <meta property="og:title" content="Apptus" />
+    <meta property="og:url" content="https://apptus.online" />
+    <meta property="og:image" content="<%= asset_url "logo.png" %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Feature rich group chatting website. Communicate with ease, on any device!" />
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
