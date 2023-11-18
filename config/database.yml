@@ -23,4 +23,4 @@ production:
   <<: *default
   database: Apptus_production
   prepared_statements: false
-  url: <%= Rails.application.credentials.dig(:supabase, :database_url) %>
+  url: <%= ENV['DATABASE_URL'] %>
