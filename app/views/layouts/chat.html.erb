@@ -37,6 +37,10 @@
           flex-direction: row-reverse;
       }
 
+      .message-container[data-user-id="<%= current_user.id %>"] .message-author {
+          direction: rtl;
+      }
+
       .message-container[data-user-id="<%= current_user.id %>"] .msg-info {
           flex-direction: row-reverse;
       }
