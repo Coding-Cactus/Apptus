@@ -266,6 +266,7 @@
 
 .top .message-author {
     font-weight: bold;
+    color: white;
     margin-bottom: 2px;
     display: block;
 }
