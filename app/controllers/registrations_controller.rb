@@ -8,6 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     redirect_to new_user_session_path, alert: "You must be signed in to do that." and return unless user_signed_in?
 
     current_user.pfp.purge
+    current_user.update(is_using_gravatar: false)
     redirect_to edit_user_registration_path, notice: "Profile picture deleted."
   end
 

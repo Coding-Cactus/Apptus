@@ -2,6 +2,13 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { controller: "double-click", action: "submit->doubleClick#disable" }) do |f| %>
     <%= render 'shared/pfp_input', f:, resource:, remove_pfp_path: destroy_user_pfp_path %>
 
+    <div class="checkbox-field field">
+      <%= f.check_box :is_using_gravatar %>
+      <%= f.label :is_using_gravatar do %>
+        Use <a href="https://gravatar.com/" target="_blank">Gravatar</a>
+      <% end %>
+    </div>
+
     <div class="field">
       <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", required: true %>

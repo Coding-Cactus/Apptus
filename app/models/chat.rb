@@ -37,6 +37,7 @@ class Chat < ApplicationRecord
     messages.create(user_id: User.find_by(role: :system).id, content: "Chat created")
   end
 
+  def has_pfp? = pfp.attached?
   def initials = name.split.first(2).map { |w| w[0] }.join.upcase
 
   def add_initial_users(current_user, user_ids)

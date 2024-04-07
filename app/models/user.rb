@@ -26,6 +26,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 2..255 }
   validates :colour, allow_blank: true, format: /\A#[A-F0-9]{6}\z/
   validates :contact_number, allow_blank: true, length: { in: 12..12 }
+  validates :is_using_gravatar, inclusion: { in: [true, false] }
   validates :pfp, content_type: [:png, :jpg, :jpeg, :gif], size: { less_than: 5.megabytes, message: "must be less than 5MB" }
 
   before_create do
@@ -34,10 +35,12 @@ class User < ApplicationRecord
       Array.new(12) { ("0".."9").to_a.sample }.join while contact_number.nil? || User.exists?(contact_number:)
   end
 
+  def has_pfp?   = pfp.attached? || is_using_gravatar
   def title_name = name.downcase.titlecase
   def first_name = name.split.first.titlecase
   def initials   = name.split.first(2).map(&:chr).join.upcase
   def nice_contact_number = contact_number.chars.each_slice(4).map(&:join).join("-")
+  def gravatar_url(size: 175) = "https://secure.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}.png?s=#{size}"
 
   def incoming_contact_requests
     User.joins(:outgoing_contacts).where(outgoing_contacts: { target_id: id, status: :pending })
@@ -58,8 +61,12 @@ class User < ApplicationRecord
   end
 
   def pfp_thumbnail
-    return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
-    pfp.variant(:thumb)
+    if is_using_gravatar
+      gravatar_url
+    else
+      return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
+      pfp.variant(:thumb)
+    end
   end
 
   protected

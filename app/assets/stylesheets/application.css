@@ -51,6 +51,23 @@ a:focus-visible {
     outline: 2px dashed var(--secondary-bg);
 }
 
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.checkbox-field {
+    padding-left: 5px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-field input[type='checkbox'] {
+    transform: scale(1.5);
+}
+
 label {
     font-size: 25px;
 }
@@ -107,8 +124,8 @@ input[type='checkbox'] {
     appearance: none;
     -webkit-appearance: none;
     background-color: #F1FDE8;
-    padding: 11px;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 3px;
     display: inline-block;
     position: relative;
 }
@@ -124,22 +141,11 @@ input[type='checkbox']:checked {
 
 input[type='checkbox']:checked:after {
     content: '\2714';
-    font-size: 25px;
-    position: absolute;
-    top: -4px;
-    left: 1px;
-    color: #F1FDE8;
-}
-
-input[type='checkbox'].login {
-    padding: 7px;
-    border-radius: 3px;
-}
-
-input[type='checkbox'].login:checked:after {
     font-size: 17px;
+    position: absolute;
     top: -3px;
     left: 0;
+    color: #F1FDE8;
 }
 
 input[type='file'] {
