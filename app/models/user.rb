@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :incoming_contacts, foreign_key: "target_id",  class_name: "Contact", dependent: :destroy
   has_many :outgoing_contacts, foreign_key: "creator_id", class_name: "Contact", dependent: :destroy
 
+  has_one :push_subscription, dependent: :destroy
+
   has_one_attached :pfp, dependent: :destroy do |attachable|
     attachable.variant :thumb, resize_to_limit: [175, 175]
   end

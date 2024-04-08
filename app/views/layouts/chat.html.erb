@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Apptus</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= render 'layouts/meta' %>
 
     <meta name="turbo-cache-control" content="no-cache">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
 
     <style>
         .message-container[data-user-id="<%= current_user.id %>"] .message {
@@ -51,7 +41,7 @@
     </style>
   </head>
 
-  <body>
+  <body data-controller="push" data-vapid-public-key="<%= VAPID_PUBLIC_KEY %>">
     <div id="app-page">
       <% unless turbo_frame_request? %>
         <%= render 'chats/sidebar',

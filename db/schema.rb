@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_07_153330) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_08_111404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +82,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_153330) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.string "endpoint"
+    t.string "p256dh"
+    t.string "auth"
+    t.boolean "subscribed"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id", unique: true
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "message_id", null: false
@@ -118,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_07_153330) do
   add_foreign_key "chat_members", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "statuses", "messages"
   add_foreign_key "statuses", "users"
 end

@@ -47,5 +47,8 @@ Rails.application.routes.draw do
   resources :contacts, only: %i[index create update destroy]
   get "contacts/pending", to: "contacts#new", as: :pending_contacts
 
+  post "push_notifications/subscribe"
+  post "push_notifications/subscription-change"
+
   get "/ping", to: "application#ping"
 end
