@@ -26,7 +26,7 @@ class PushNotificationsController < ApplicationController
   end
 
   def subscription_change
-    if (subscription = PushSubscription.find_by(user_id: current_user.id)).nil?
+    if !(subscription = PushSubscription.find_by(user_id: current_user.id)).nil?
       subscription.update(
         user_id: current_user.id,
         endpoint: params[:endpoint],
