@@ -24,7 +24,7 @@ class Chat < ApplicationRecord
         "user_#{user.id}_chats",
         target: "chat_#{id}",
         partial: "chats/chat",
-        locals: { from_stream: true, current_user: user }
+        locals: { from_stream: true, user: }
       )
     end
   end

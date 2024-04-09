@@ -16,7 +16,7 @@ class ChatMember < ApplicationRecord
       "user_#{user_id}_chats",
       target: "list",
       partial: "chats/chat_preview",
-      locals: { chat:, new_chat: true, redirected_to: chat.owner_id == user_id }
+      locals: { chat:, user:, new_chat: true, redirected_to: chat.owner_id == user_id }
     )
   end
 

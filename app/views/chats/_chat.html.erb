@@ -2,7 +2,7 @@
   <div class="chat-icon-wrapper">
     <%= render 'shared/icon', resource: chat, size: :big %>
 
-    <% if 0 < (unread_count = chat.unread_count(current_user)) %>
+    <% if 0 < (unread_count = chat.unread_count(user)) %>
       <span data-controller="unread-count" class="unread-count" style="width: <%= 20 + 5 * Math.log10(unread_count).floor %>px"><%= unread_count %></span>
     <% end %>
   </div>

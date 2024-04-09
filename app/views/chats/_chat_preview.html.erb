@@ -14,5 +14,5 @@
   <%= link_to '', chat,
               data: { turbo_frame: 'chat', action: 'click->open-chat#open' },
               class: 'link-blanket' %>
-  <%= render chat, from_stream: false %>
+  <%= render chat, from_stream: false, user: %>
 </div>
