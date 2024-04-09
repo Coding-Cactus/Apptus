@@ -24,7 +24,7 @@ class Chat < ApplicationRecord
         "user_#{user.id}_chats",
         target: "chat_#{id}",
         partial: "chats/chat",
-        locals: { from_stream: true }
+        locals: { from_stream: true, current_user: user }
       )
     end
   end
@@ -67,6 +67,10 @@ class Chat < ApplicationRecord
   def pfp_thumbnail
     return pfp if pfp.content_type == "image/gif" || errors.include?(:pfp)
     pfp.variant(:thumb)
+  end
+
+  def unread_count(user)
+    messages.includes(:statuses).where(statuses: { user: user, status: :received }).length
   end
 
   private

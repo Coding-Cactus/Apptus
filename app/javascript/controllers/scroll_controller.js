@@ -42,6 +42,7 @@ export default class extends Controller {
             ) {
                 markReadLink.setAttribute("data-enabled", "false")
                 markReadLink.click()
+                document.querySelector(".chat-preview.selected .unread-count")?.remove()
             }
         }
 

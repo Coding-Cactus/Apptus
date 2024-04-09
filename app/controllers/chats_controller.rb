@@ -66,7 +66,7 @@ class ChatsController < ApplicationController
       status: "received",
       user: current_user,
       message: { chat_id: @chat.id }
-    ).where.not(message: { user: [current_user, User.find_by(role: :system)] })
+    ).where.not(message: { user: current_user })
 
     # Load and save statuses so they can be used in loop below, otherwise query returns nothing
     # due to all statuses having been set to read

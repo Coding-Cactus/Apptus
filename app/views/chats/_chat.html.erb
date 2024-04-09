@@ -1,5 +1,11 @@
 <div id="<%= dom_id(chat) %>" data-open-chat-target="content" <%= 'data-controller="sort-chats"'.html_safe if from_stream %>>
-  <%= render 'shared/icon', resource: chat, size: :big %>
+  <div class="chat-icon-wrapper">
+    <%= render 'shared/icon', resource: chat, size: :big %>
+
+    <% if 0 < (unread_count = chat.unread_count(current_user)) %>
+      <span data-controller="unread-count" class="unread-count" style="width: <%= 20 + 5 * Math.log10(unread_count).floor %>px"><%= unread_count %></span>
+    <% end %>
+  </div>
 
   <div class="chat-preview-details">
     <div class="chat-preview-header">
