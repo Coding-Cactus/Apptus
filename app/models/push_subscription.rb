@@ -6,20 +6,16 @@ class PushSubscription < ApplicationRecord
   validates :auth, presence: true
 
   def send_push_notification(**options)
-    Thread.new do
-      WebPush.payload_send(
-        message: JSON.generate(options),
-        endpoint:,
-        p256dh:,
-        auth:,
-        vapid: {
-          subject: "mailto:push@#{ENV['APPTUS_EMAIL_HOST']}",
-          public_key: VAPID_PUBLIC_KEY,
-          private_key: VAPID_PRIVATE_KEY
-        }
-      )
-    rescue WebPush::ExpiredSubscription
-      self.subscribed = false
-    end
+    NewMessagePushNotificationJob.perform_later(
+      message: JSON.generate(options),
+      endpoint:,
+      p256dh:,
+      auth:,
+      vapid: {
+        subject: "mailto:push@#{ENV['APPTUS_EMAIL_HOST']}",
+        public_key: VAPID_PUBLIC_KEY,
+        private_key: VAPID_PRIVATE_KEY
+      }
+    )
   end
 end
