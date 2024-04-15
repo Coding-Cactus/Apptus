@@ -69,6 +69,12 @@ class Chat < ApplicationRecord
     pfp.variant(:thumb)
   end
 
+  def notification_pfp_url
+    ActiveStorage::Current.set(url_options: Rails.application.routes.default_url_options) do
+      has_pfp? ? pfp_thumbnail.url : nil
+    end
+  end
+
   def unread_count(user)
     messages.includes(:statuses).where(statuses: { user: user, status: :received }).length
   end

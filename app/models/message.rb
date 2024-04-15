@@ -26,15 +26,13 @@ class Message < ApplicationRecord
 
   private
     def send_push_notifications
-      ActiveStorage::Current.set(url_options: Rails.application.routes.default_url_options) do
-        PushSubscription.where(user_id: chat.user_ids, subscribed: true).each do |subscription|
-          subscription.send_push_notification(
-            title: chat.name,
-            body: content,
-            icon: chat.has_pfp? ? chat.pfp_thumbnail.url : nil,
-            data: { url: Rails.application.routes.url_helpers.chat_url(chat) }
-          )
-        end
+      PushSubscription.where(user_id: chat.user_ids, subscribed: true).each do |subscription|
+        subscription.send_push_notification(
+          title: chat.name,
+          body: content,
+          icon: chat.notification_pfp_url,
+          data: { url: Rails.application.routes.url_helpers.chat_url(chat) }
+        )
       end
     end
 end

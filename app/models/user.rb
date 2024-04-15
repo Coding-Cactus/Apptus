@@ -71,6 +71,14 @@ class User < ApplicationRecord
     end
   end
 
+  def notification_pfp_url
+    ActiveStorage::Current.set(url_options: Rails.application.routes.default_url_options) do
+      if has_pfp?
+        (pfp = pfp_thumbnail).is_a?(String) ? pfp : pfp.url
+      end
+    end
+  end
+
   protected
     def email_required?        = !system?
     def password_required?     = (!persisted? || !password.nil? || !password_confirmation.nil?) && !system?

@@ -1,0 +1,11 @@
+<h1>Hi there, <%= @target.first_name %>!</h1>
+
+<img src="<%= @creator.notification_pfp_url %>"
+     alt="<%= @creator.title_name %>'s profile picture"
+     class="pfp"
+     width="150"
+     height="150" />
+
+<p><strong><%= @creator.title_name %></strong> would like to be added to your contacts.</p>
+
+<%= link_to 'View request', pending_contacts_url, class: "button" %>
