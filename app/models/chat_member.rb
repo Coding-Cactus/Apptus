@@ -10,6 +10,13 @@ class ChatMember < ApplicationRecord
   validates :user_id, presence: true, uniqueness: { scope: :chat_id }
 
   after_create_commit do
+    user.push_subscription&.send_push_notification(
+      title: "You've been added to a chat",
+      body: "You're now a member of '#{chat.name}'",
+      icon: chat.notification_pfp_url,
+      data: { url: Rails.application.routes.url_helpers.chat_url(chat) }
+    )
+
     chat.messages.create(user_id: User.find_by(role: :system).id, content: "#{user.title_name} was added")
 
     broadcast_prepend_later_to(
