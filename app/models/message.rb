@@ -14,7 +14,7 @@ class Message < ApplicationRecord
 
   after_create_commit do
     statuses.create(chat.user_ids.map { |id| { user_id: id, status: ("read" if id == user_id) }.compact })
-    send_push_notifications
+    send_push_notifications unless user.system?
   end
 
   def lowest_status
